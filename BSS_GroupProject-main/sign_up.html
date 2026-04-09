@@ -1,0 +1,71 @@
+<head>
+    <meta charset="utf-8"><!--character encoding for the document (Unicode) -->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"> <!--Allowing multiple device types-->
+    <title>Sign up</title>
+</head>
+
+<body>
+    <header>
+        <h1>Please enter details below </h1>
+    </header>
+
+    <form class="sign_up_Inputs">
+        <label for="fname">First name:</label><br>
+        <input type="text" id="fname" name="fname" class="fname_Input" required><br>
+
+        <label for="lname">Last name:</label><br>
+        <input type="text" id="lname" name="lname" class="lname_Input" required><br>
+
+        <label for="dob">Date of birth:</label><br>
+        <input type="date" id="dob" name="dob" class=dob_input required><br>
+
+        <select id="gender" name="gender" class="gender_Input" required>
+            <option>Male</option>
+            <option>Female</option>
+            <option>Other</option>
+        </select>
+        <br>
+
+        <!--must discuss about how we are going to do this, database with all subjects?-->
+
+        <!-- Refrence Number [1] -->
+        <label for="subject">Subject:</label><br>
+        <select name="subject" id="subject" class="subject_Input" required>
+            <option value="Maths">Maths</option>
+            <option value="English">English</option>
+            <option value="Computer Science">Computer Science </option>
+            <option value="German">German</option>
+        </select><br>
+
+        <label for="studyYear">Year of study: </label><br>
+        <select id="studyYear" name="studyYear" class = "year_study_Input" required>
+            <option value="Year 1">Year1</option>
+            <option value="Year 2">Year2</option>
+            <option value="Year 3">Year3</option>
+            <option value="Year 4">Year4</option>
+            <option value="Year 5">Year5</option>
+        </select><br>
+
+        <label for="email">Email address: </label><br>
+        <input type="text" id="email" name="email" class = "year_study_Input" required><br>
+
+        <label for="phone">Phone number: </label><br>
+        <input type="text" id="phone" name="phone" class = "phone_Input"><br>
+
+        <label for="description">Description:</label><br>
+        <input type="text" id="description" name="description" class = "desc_Input_SignUp"><br>
+
+        <label for="password">Password:</label><br>
+        <input type="password" id="password" name="password" class = "password_Input"required><br>
+
+        <button type="submit">Sign Up</button>
+    </form>
+
+
+
+
+    <script src="index.js"></script>
+    <!-- used to connect html to js=, only works at the bottom of the html page otherwise no results are shown/js doesnt work-->
+</body>
+
+</html>
