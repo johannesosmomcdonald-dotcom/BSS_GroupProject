@@ -2,9 +2,9 @@
   "name": "neon-render_connection",
   "version": "1.0.0",
   "description": "JSON package for BSS Project",
-  "main": "index.js",
+  "main": "server.js",
   "scripts": {
-    "start": "node index.js"
+    "start": "node server.js"
   },
   "repository": {
     "type": "git",
