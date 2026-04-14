@@ -25,7 +25,7 @@ pool.connect()
   .catch(err => console.error("Database connection error:", err));
 
 // Root endpoint
-/*
+
 app.get("/", async (req, res) => {
   try {
     const { rows } = await pool.query("SELECT * FROM users;"); //Query for database
@@ -35,12 +35,13 @@ app.get("/", async (req, res) => {
     res.status(500).json({ error: error.message });
   }
 });
-*/
 
+
+/*
 app.get("/", (req, res) => {
    res.sendFile(path.join(__dirname, 'public', 'index.html'));
 })
-
+*/
 
 
 
