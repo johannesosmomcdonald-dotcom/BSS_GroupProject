@@ -1,0 +1,86 @@
+document.addEventListener("DOMContentLoaded", () => {
+  const form = document.querySelector(".sign_up_Inputs");
+
+  if (!form) {
+    console.error("Signup form not found.");
+    return;
+  }
+
+  form.addEventListener("submit", async (event) => {
+    event.preventDefault();
+
+    // Get form values
+    const first_name = document.querySelector("fname")?.value.trim();
+    const last_name = document.querySelector("lname")?.value.trim();
+    const Date_Of_Birth = document.querySelector("dob")?.value;
+    const gender = document.querySelector("gender")?.value.trim();
+    const degreeType = document.querySelector("degree_type");
+    const subject = document.querySelector("subject")?.value.trim();
+    const year_of_study_currunt = Number(document.querySelector("studyYear")?.value);
+    const email = document.querySelector("email")?.value.trim().toLowerCase();
+    const phoneNum = document.querySelector("phone")?.value.trim();
+    const description = document.querySelector("description")?.value.trim();
+    const password = document.querySelector("password")?.value;
+
+    // Basic client-side validation
+    if (
+      !first_name ||
+      !last_name ||
+      !Date_Of_Birth ||
+      !gender ||
+      !subject ||
+      !email ||
+      !description ||
+      !password
+    ) {
+      alert("Please fill in all required fields.");
+      return;
+    }
+
+    if (!Number.isInteger(year_of_study_currunt) || year_of_study_currunt < 1) {
+      alert("Please enter a valid year of study.");
+      return;
+    }
+
+    if (password.length < 8) {
+      alert("Password must be at least 8 characters long.");
+      return;
+    }
+
+    const userData = {
+      first_name,
+      last_name,
+      Date_Of_Birth,
+      gender,
+      subject,
+      degree_type,
+      year_of_study_currunt,
+      email,
+      phoneNum,
+      description,
+      password
+    };
+
+    try {
+      const response = await fetch("/users", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json"
+        },
+        body: JSON.stringify(userData)
+      });
+
+      const result = await response.json();
+
+      if (!response.ok) {
+        throw new Error(result.error || "Failed to create user.");
+      }
+
+      
+     
+      form.reset();
+    } catch (error) {
+
+    }
+  });
+});
