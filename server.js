@@ -23,6 +23,7 @@ const pool = new Pool({
 
 // Test DB connection
 pool.connect()
+  .then(() => console.log("Database connection successful"))
   .catch(err => console.error("Database connection error:", err));
 // Root endpoint
 
@@ -51,13 +52,13 @@ app.post("/users", async (req, res) => {
   try {
     const first_name = String(req.body.first_name || "").trim();
     const last_name = String(req.body.last_name || "").trim();
-    const Date_Of_Birth = req.body.Date_Of_Birth;
+    const date_of_birth = req.body.Date_Of_Birth;
     const gender = String(req.body.gender || "").trim();
     const subject = String(req.body.subject || "").trim();
     const degree_type = String(req.body.degree_type || "").trim();
     const year_of_study_currunt = Number(req.body.year_of_study_currunt);
     const email = String(req.body.email || "").trim().toLowerCase();
-    const phoneNum = String(req.body.phoneNum || "").trim();
+    const phone_num = String(req.body.phoneNum || "").trim();
     const description = String(req.body.description || "").trim();
     const password = String(req.body.password || "");
 
@@ -81,19 +82,19 @@ app.post("/users", async (req, res) => {
 
     const result = await pool.query(
       `INSERT INTO users
-        (first_name, last_name, Date_Of_Birth, gender, subject, degree_type, year_of_study_currunt, email, phoneNum, description, password_hash)
+        (first_name, last_name, date_of_birth, gender, subject, degree_type, year_of_study_currunt, email, phone_num, description, password_hash)
        VALUES ($1,$2,$3,$4,$5,$6,$7,$8,$9,$10,$11)
-       RETURNING id, first_name, last_name, Date_Of_Birth, gender, subject, degree_type, year_of_study_currunt, email, phoneNum, description;`,
+       RETURNING id, first_name, last_name, date_of_birth, gender, subject, degree_type, year_of_study_currunt, email, phone_num, description;`,
       [
         first_name,
         last_name,
-        Date_Of_Birth,
+        date_of_birth,
         gender,
         subject,
         degree_type,
         year_of_study_currunt,
         email,
-        phoneNum,
+        phone_num,
         description,
         password_hash,
       ]

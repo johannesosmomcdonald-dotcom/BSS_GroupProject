@@ -12,13 +12,13 @@ document.addEventListener("DOMContentLoaded", () => {
         // Get form values
         const first_name = document.querySelector("#fname")?.value.trim();
         const last_name = document.querySelector("#lname")?.value.trim();
-        const Date_Of_Birth = document.querySelector("#dob")?.value;
+        const date_of_birth = document.querySelector("#dob")?.value;
         const gender = document.querySelector("#gender")?.value.trim();
         const degree_type = document.querySelector("#degree_type");
         const subject = document.querySelector("#subject")?.value.trim();
         const year_of_study_currunt = Number(document.querySelector("#studyYear")?.value);
         const email = document.querySelector("#email")?.value.trim().toLowerCase();
-        const phoneNum = document.querySelector("#phone")?.value.trim();
+        const phone_num = document.querySelector("#phone")?.value.trim();
         const description = document.querySelector("#description")?.value.trim();
         const password = document.querySelector("#password")?.value;
 
@@ -26,7 +26,7 @@ document.addEventListener("DOMContentLoaded", () => {
         if (
             !first_name ||
             !last_name ||
-            !Date_Of_Birth ||
+            !date_of_birth ||
             !gender ||
             !subject ||
             !email ||
@@ -50,13 +50,13 @@ document.addEventListener("DOMContentLoaded", () => {
         const userData = {
             first_name,
             last_name,
-            Date_Of_Birth,
+            date_of_birth,
             gender,
             subject,
             degree_type,
             year_of_study_currunt,
             email,
-            phoneNum,
+            phone_num,
             description,
             password
         };
