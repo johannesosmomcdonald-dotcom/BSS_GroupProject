@@ -102,9 +102,15 @@ app.post("/users", async (req, res) => {
 
     res.json(result.rows[0]);
   } catch (err) {
-    // err.code = "23505" is used to catch duplicate emails to prevent malicous users from creating duplicate accounts breaking the system
+    console.error("code:", err.code);
+    console.error("constraint:", err.constraint);
+    console.error("detail:", err.detail);
+
     if (err.code === "23505") {
-      return res.status(409).json({ error: "Email already exists" });
+      return res.status(409).json({
+        error: `Unique constraint failed: ${err.constraint}`,
+        detail: err.detail
+      });
     }
     console.error(err);
     res.status(500).json({ error: "Server error" });
