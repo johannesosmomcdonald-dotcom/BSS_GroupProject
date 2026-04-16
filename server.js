@@ -52,13 +52,13 @@ app.post("/users", async (req, res) => {
   try {
     const first_name = String(req.body.first_name || "").trim();
     const last_name = String(req.body.last_name || "").trim();
-    const date_of_birth = req.body.Date_Of_Birth;
+    const date_of_birth = req.body.date_of_birth;
     const gender = String(req.body.gender || "").trim();
     const subject = String(req.body.subject || "").trim();
     const degree_type = String(req.body.degree_type || "").trim();
     const year_of_study_currunt = Number(req.body.year_of_study_currunt);
     const email = String(req.body.email || "").trim().toLowerCase();
-    const phone_num = String(req.body.phoneNum || "").trim();
+    const phone_num = String(req.body.phone_num || "").trim();
     const description = String(req.body.description || "").trim();
     const password = String(req.body.password || "");
 
@@ -110,9 +110,6 @@ app.post("/users", async (req, res) => {
     res.status(500).json({ error: "Server error" });
   }
 });
-
-
-
 
 
 ///////////////////////////////// ALL Listens are below this comment
