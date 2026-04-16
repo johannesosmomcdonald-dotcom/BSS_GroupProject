@@ -26,7 +26,7 @@ pool.connect()
 
 // Root endpoint
 
-app.get("/", async (req, res) => {
+app.get("/users", async (req, res) => {
   try {
     const { rows } = await pool.query("SELECT * FROM users;"); //Query for database
     res.json(rows); //prints results of JSON
