@@ -47,7 +47,7 @@ app.get("/", (req, res) => {
 
 /////////////////////////////// ALL POSTS are below this comment
 //post for adding new users to the database
-application.post("/users", async (req, res) => {
+app.post("/users", async (req, res) => {
   try {
     const first_name = String(req.body.first_name || "").trim();
     const last_name = String(req.body.last_name || "").trim();
