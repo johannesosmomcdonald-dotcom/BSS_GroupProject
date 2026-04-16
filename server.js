@@ -2,7 +2,7 @@
 // Code for connecting neon, render and github
 
 const express = require("express");
-const  path  = require("path");
+const path = require("path");
 const { Pool } = require("pg");
 require("dotenv").config();
 const bcrypt = require("bcrypt");
@@ -18,7 +18,7 @@ const port = process.env.PORT || 3000; //Port
 // PostgreSQL / Neon connection with SSL
 const pool = new Pool({
   connectionString: process.env.DATABASE_URL,
-  ssl: { rejectUnauthorized: false }, 
+  ssl: { rejectUnauthorized: false },
 });
 
 // Test DB connection
@@ -43,7 +43,7 @@ app.get("/users", async (req, res) => {
 
 // Gets index page
 app.get("/", (req, res) => {
-   res.sendFile(path.join(__dirname, 'public', 'index.html'));
+  res.sendFile(path.join(__dirname, 'public', 'index.html'));
 })
 
 /////////////////////////////// ALL POSTS are below this comment

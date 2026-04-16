@@ -29,6 +29,7 @@ document.addEventListener("DOMContentLoaded", () => {
             !date_of_birth ||
             !gender ||
             !subject ||
+            !degree_type ||
             !email ||
             !description ||
             !password
@@ -36,7 +37,6 @@ document.addEventListener("DOMContentLoaded", () => {
             alert("Please fill in all required fields.");
             return;
         }
-
         if (!Number.isInteger(year_of_study_currunt) || year_of_study_currunt < 1) {
             alert("Please enter a valid year of study.");
             return;
