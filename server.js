@@ -35,6 +35,9 @@ pool.connect()
   .then(() => console.log("Database connection successful"))
   .catch(err => console.error("Database connection error:", err));
 
+
+
+
 app.set("trust proxy", 1);
 
 // used for tracking the user sessions 
@@ -56,6 +59,9 @@ app.use(
     },
   })
 );
+
+// serves the files in public folder
+app.use(express.static(path.join(__dirname, 'public')))
 /////////////////////////////////////////////////////////////////////////
 //This piece of code ensures that users must login to get to a dashboard
 
@@ -70,8 +76,10 @@ function requireLogin(req, res, next) {
 //////////////////////////////////////////////////////////////////////////
 /////////////////////////// ALL GETS are below this comment
 
-// serves the files in public folder
-app.use(express.static(path.join(__dirname, 'public')))
+// Gets index page
+app.get("/", (req, res) => {
+  res.sendFile(path.join(__dirname, 'public', 'index.html'));
+})
 
 // Gets all users in database
 app.get("/users", async (req, res) => {
@@ -134,12 +142,6 @@ app.get("/api/me", async (req, res) => {
     res.status(500).json({ error: "Server error" });
   }
 });
-
-
-// Gets index page
-app.get("/", (req, res) => {
-  res.sendFile(path.join(__dirname, 'public', 'index.html'));
-})
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 //  ALL POSTS are below this comment
