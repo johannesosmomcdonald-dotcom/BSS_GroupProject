@@ -18,8 +18,7 @@ app.use(express.json()); // used to display the json
 app.use(express.urlencoded({ extended: true })); // security add on that makes sure that it only returns middleware that only parses urlencoded bodies 
 // In addition to only looking at requests where content header matches the type option requested
 
-// serves the files in public folder
-app.use(express.static(path.join(__dirname, 'public')))
+
 
 const port = process.env.PORT || 3000; //Port
 
@@ -70,6 +69,9 @@ function requireLogin(req, res, next) {
 
 //////////////////////////////////////////////////////////////////////////
 /////////////////////////// ALL GETS are below this comment
+
+// serves the files in public folder
+app.use(express.static(path.join(__dirname, 'public')))
 
 // Gets all users in database
 app.get("/users", async (req, res) => {
