@@ -35,6 +35,28 @@ const pool = new Pool({
 pool.connect()
   .then(() => console.log("Database connection successful"))
   .catch(err => console.error("Database connection error:", err));
+
+app.set("trust proxy", 1);
+
+// used for tracking the user sessions 
+app.use(
+  session({
+    store: new pgSession({ // session infomation
+      pool: pool,
+      tableName: "BSS_user_sessions", 
+      createTableIfMissing: true,
+    }),
+    secret: process.env.SESSION_SECRET, //ID Session cookie/tracker
+    resave: false, // doesn't save session info
+    saveUninitialized: false, // set to false to prevent uninitalised sessions from being saved
+    cookie: { // setting objects for websites cookies
+      httpOnly: true,
+      secure: process.env.NODE_ENV === "production", // ensures that the website cookies are only sent over https for security precautions - used for connecting with render 
+      sameSite: "lax", // cookie is sent for navigating the BSS website while refusing most cross website requests
+      maxAge: 1000 * 60 * 60 * 24, // keeps the cookie for 1 day / allows the user to stay logged in up to 1 day
+    },
+  })
+);
 /////////////////////////////////////////////////////////////////////////
 //This piece of code ensures that users must login to get to a dashboard
 

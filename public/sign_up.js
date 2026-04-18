@@ -31,6 +31,7 @@ document.addEventListener("DOMContentLoaded", () => {
             !subject ||
             !degree_type ||
             !email ||
+            !description ||
             !password
         ) {
             alert("Please fill in all required fields.");
