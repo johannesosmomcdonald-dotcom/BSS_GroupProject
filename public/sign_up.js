@@ -74,10 +74,11 @@ document.addEventListener("DOMContentLoaded", () => {
             if (!response.ok) {
                 throw new Error(result.error || "Failed to create user.");
             }
-
-
+            
+            alert("Account created successfully. You can now log in.");
             console.log(result);
             form.reset();
+            window.location.href = "/login.html";
         } catch (error) {
             console.error("Signup failed:", error);
             alert(error.message);
