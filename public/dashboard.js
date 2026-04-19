@@ -18,8 +18,9 @@ document.addEventListener("DOMContentLoaded", () => { //same as other  JS files 
       const user = result.user;
 
       welcomeText.textContent = `Welcome, ${user.first_name} ${user.last_name}`; // printing unique user id data
+      // creating list of user info displayed via innerHTML
 
-      profileList.innerHTML = ` // creating list of user info displayed via innerHTML
+      profileList.innerHTML = ` 
         <li><strong>User ID:</strong> ${user.id}</li>
         <li><strong>First name:</strong> ${user.first_name}</li>
         <li><strong>Last name:</strong> ${user.last_name}</li>
