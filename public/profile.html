@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>My Profile</title>
+    <link rel="stylesheet" href="profile.css" />
+</head>
+
+<body>
+    <main class="profile-page">
+        <h1>My Details</h1>
+
+        <div class="top-actions">
+            <button id="backBtn" type="button">Back to Dashboard</button>
+        </div>
+
+        <section class="card">
+            <h2>Current Details</h2>
+            <p id="statusMessage"></p>
+
+            <form id="profileForm">
+                <label for="first_name">First name</label>
+                <input type="text" id="first_name" name="first_name" required />
+
+                <label for="last_name">Last name</label>
+                <input type="text" id="last_name" name="last_name" required />
+
+                <label for="date_of_birth">Date of birth</label>
+                <input type="date" id="date_of_birth" name="date_of_birth" />
+
+                <label for="gender">Gender</label>
+                <select id="gender" name="gender">
+                    <option value="">Select gender</option>
+                    <option value="Male">Male</option>
+                    <option value="Female">Female</option>
+                    <option value="Other">Other</option>
+                </select>
+
+                <label for="subject">Subject</label>
+                <select id="subject" name="subject">
+                    <option value="">Select subject</option>
+                    <option value="Maths">Maths</option>
+                    <option value="English">English</option>
+                    <option value="Computer Science">Computer Science</option>
+                    <option value="German">German</option>
+                </select>
+
+                <label for="degree_type">Degree type</label>
+                <select id="degree_type" name="degree_type">
+                    <option value="">Select degree type</option>
+                    <option value="BSc">BSc</option>
+                    <option value="BA">BA</option>
+                    <option value="MSc">MSc</option>
+                    <option value="MA">MA</option>
+                </select>
+
+                <label for="year_of_study_currunt">Year of study</label>
+                <select id="year_of_study_currunt" name="year_of_study_currunt">
+                    <option value="">Select year</option>
+                    <option value="1">Year 1</option>
+                    <option value="2">Year 2</option>
+                    <option value="3">Year 3</option>
+                    <option value="4">Year 4</option>
+                    <option value="5">Year 5</option>
+                </select>
+
+                <label for="email">Email</label>
+                <input type="email" id="email" name="email" required />
+
+                <label for="phone_num">Phone number</label>
+                <input type="text" id="phone_num" name="phone_num" />
+
+                <label for="description">Description</label>
+                <textarea id="description" name="description" rows="5"></textarea>
+
+                <button type="submit">Save Changes</button>
+            </form>
+        </section>
+    </main>
+
+    <script src="profile.js"></script>
+</body>
+
+</html>

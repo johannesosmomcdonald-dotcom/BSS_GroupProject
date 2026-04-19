@@ -1,0 +1,81 @@
+document.addEventListener("DOMContentLoaded", () => { 
+  const form = document.querySelector("#profileForm");
+  const statusMessage = document.querySelector("#statusMessage");
+  const backBtn = document.querySelector("#backBtn");
+
+  async function loadProfile() {
+    try {
+      const response = await fetch("/api/dashboard");
+      const result = await response.json();
+
+      if (!response.ok) {
+        throw new Error(result.error || "Could not load profile");
+      }
+
+      const user = result.user;
+
+      document.querySelector("#first_name").value = user.first_name || "";
+      document.querySelector("#last_name").value = user.last_name || "";
+      document.querySelector("#date_of_birth").value = user.date_of_birth
+        ? String(user.date_of_birth).split("T")[0]
+        : "";
+      document.querySelector("#gender").value = user.gender || "";
+      document.querySelector("#subject").value = user.subject || "";
+      document.querySelector("#degree_type").value = user.degree_type || "";
+      document.querySelector("#year_of_study_currunt").value = user.year_of_study_currunt || "";
+      document.querySelector("#email").value = user.email || "";
+      document.querySelector("#phone_num").value = user.phone_num || "";
+      document.querySelector("#description").value = user.description || "";
+    } catch (error) {
+      console.error("Profile load error:", error);
+      statusMessage.textContent = error.message;
+      setTimeout(() => {
+        window.location.href = "/login.html";
+      }, 1200);
+    }
+  }
+
+  form.addEventListener("submit", async (event) => {
+    event.preventDefault();
+
+    const userData = {
+      first_name: document.querySelector("#first_name").value.trim(),
+      last_name: document.querySelector("#last_name").value.trim(),
+      date_of_birth: document.querySelector("#date_of_birth").value || null,
+      gender: document.querySelector("#gender").value.trim(),
+      subject: document.querySelector("#subject").value.trim(),
+      degree_type: document.querySelector("#degree_type").value.trim(),
+      year_of_study_currunt: Number(document.querySelector("#year_of_study_currunt").value),
+      email: document.querySelector("#email").value.trim().toLowerCase(),
+      phone_num: document.querySelector("#phone_num").value.trim(),
+      description: document.querySelector("#description").value.trim()
+    };
+
+    try {
+      const response = await fetch("/api/me", {
+        method: "PUT",
+        headers: {
+          "Content-Type": "application/json"
+        },
+        body: JSON.stringify(userData)
+      });
+
+      const result = await response.json();
+
+      if (!response.ok) {
+        throw new Error(result.error || "Could not update details");
+      }
+
+      statusMessage.textContent = "Details updated successfully.";
+    } catch (error) {
+      console.error("Profile update error:", error);
+      statusMessage.textContent = error.message;
+    }
+  });
+
+  backBtn.addEventListener("click", () => {
+    window.location.href = "/dashboard.html";
+  });
+
+  loadProfile();
+});

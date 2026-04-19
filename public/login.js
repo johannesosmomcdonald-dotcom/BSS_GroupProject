@@ -23,6 +23,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
       if (!response.ok) {
         throw new Error(result.error || "Login failed");
+        return;
       }
 
       window.location.href = "/dashboard.html";

@@ -1,7 +1,8 @@
-document.addEventListener("DOMContentLoaded", () => {
-    // fetching from html dashboard
+document.addEventListener("DOMContentLoaded", () => { //same as other  JS files in /public
+  // fetching from html dashboard
   const welcomeText = document.querySelector("#welcomeText");
   const profileList = document.querySelector("#profileList");
+  const editDetailsBtn = document.querySelector("#editDetailsBtn");
   const logoutBtn = document.querySelector("#logoutBtn");
   const message = document.querySelector("#message");
 
@@ -18,7 +19,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
       welcomeText.textContent = `Welcome, ${user.first_name} ${user.last_name}`; // printing unique user id data
 
-      profileList.innerHTML = `
+      profileList.innerHTML = ` // creating list of user info displayed via innerHTML
         <li><strong>User ID:</strong> ${user.id}</li>
         <li><strong>First name:</strong> ${user.first_name}</li>
         <li><strong>Last name:</strong> ${user.last_name}</li>
@@ -43,6 +44,12 @@ document.addEventListener("DOMContentLoaded", () => {
     }
   }
 
+
+  editDetailsBtn.addEventListener("click", () => { // edit button takes back to profile
+    window.location.href = "/profile.html";
+  });
+
+
   logoutBtn.addEventListener("click", async () => { // logout feature
     try {
       const response = await fetch("/logout", {
@@ -55,7 +62,7 @@ document.addEventListener("DOMContentLoaded", () => {
         throw new Error(result.error || "Logout failed");
       }
 
-      window.location.href = "/login.html";
+      window.location.href = "/index.html";
     } catch (error) {
       message.textContent = error.message;
     }

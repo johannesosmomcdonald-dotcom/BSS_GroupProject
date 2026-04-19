@@ -1,12 +1,12 @@
-document.addEventListener("DOMContentLoaded", () => {
-    const form = document.querySelector(".sign_up_Inputs");
+document.addEventListener("DOMContentLoaded", () => { // sets up a event listener 
+    const form = document.querySelector(".sign_up_Inputs"); // selects query from form via a form ID
 
-    if (!form) {
+    if (!form) { // if statment for if form not found
         console.error("Signup form not found.");
         return;
     }
 
-    form.addEventListener("submit", async (event) => {
+    form.addEventListener("submit", async (event) => { // form event listener if a submit event action is done in this case a button click
         event.preventDefault();
 
         // Get form values
@@ -34,7 +34,7 @@ document.addEventListener("DOMContentLoaded", () => {
             !description ||
             !password
         ) {
-            alert("Please fill in all required fields.");
+            alert("Please fill in all required fields."); // alert iof fields arent entered
             return;
         }
         if (!Number.isInteger(year_of_study_currunt) || year_of_study_currunt < 1) {
@@ -46,6 +46,8 @@ document.addEventListener("DOMContentLoaded", () => {
             alert("Password must be at least 8 characters long.");
             return;
         }
+
+        // sets up const of user data
 
         const userData = {
             first_name,
@@ -61,26 +63,26 @@ document.addEventListener("DOMContentLoaded", () => {
             password
         };
 
-        try {
+        try { // utilises a fetch request from server.js 
             const response = await fetch("/users", {
                 method: "POST",
                 headers: {
                     "Content-Type": "application/json"
                 },
-                body: JSON.stringify(userData)
+                body: JSON.stringify(userData) // converts data to a JSON string
             });
 
             const result = await response.json();
 
-            if (!response.ok) {
+            if (!response.ok) { //error if statement 
                 throw new Error(result.error || "Failed to create user.");
             }
             
-            alert("Account created successfully. You can now log in.");
-            console.log(result);
-            form.reset();
-            window.location.href = "/login.html";
-        } catch (error) {
+            alert("Account created successfully. You can now log in."); 
+            console.log(result); //logs to console UI
+            form.reset(); // resets form
+            window.location.href = "/login.html"; // takes to a login page
+        } catch (error) { // error catch
             console.error("Signup failed:", error);
             alert(error.message);
         }
