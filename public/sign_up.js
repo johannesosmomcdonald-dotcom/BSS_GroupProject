@@ -87,4 +87,9 @@ document.addEventListener("DOMContentLoaded", () => { // sets up a event listene
             alert(error.message);
         }
     });
+
+    backBtn.addEventListener("click", () => { // code for backbutton
+    window.location.href = "/index.html";
+  });
+
 });
