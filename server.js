@@ -121,10 +121,11 @@ app.get("/users", async (req, res) => { // /users used to represent what it look
 //GET for searching other users
 app.get("/api/users/search", requireLogin, async (req, res) => { //Sets up GET
   try {
-    const degree = String(req.query.degree || "").trim(); //Gets the degree being looked for
+    const degree = String(req.query.degree || "").trim();  //Gets the degree being looked for
+
 
     if (!degree) { // checks for search term 
-      return res.status(400).json({ error: "Please enter a seach term" });
+      return res.status(400).json({ error: "Please enter a search term" }); 
     }
 
     const result = await pool.query( // POSTGRES query
@@ -132,19 +133,19 @@ app.get("/api/users/search", requireLogin, async (req, res) => { //Sets up GET
        FROM users
        WHERE id != $1
        AND (
-         LOWER(subject) LIKE LOWER($2) OR LOWER(degree_type) LIKE LOWER($2)
+         LOWER(subject) LIKE LOWER($2)
+         OR LOWER(degree_type) LIKE LOWER($2)
        )
-       ORDER BY first_name,`,
+       ORDER BY first_name, last_name`,
       [req.session.userId, `%${degree}%`]
     );
 
     res.json({ users: result.rows });
   } catch (error) { // Catch again
     console.error("User search error:", error); // for console 
-    res.status(500).json({ error: "Server error" });// for user
-
+    res.status(500).json({ error: error.message }); // for user
   }
-})
+});
 
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 // GET for unique dashboard
