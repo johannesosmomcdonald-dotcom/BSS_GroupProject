@@ -119,7 +119,7 @@ app.get("/users", async (req, res) => { // /users used to represent what it look
 
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 //GET for searching other users
-app.get("api/users/search", requireLogin, async (req, res) => { //Sets up GET
+app.get("/api/users/search", requireLogin, async (req, res) => { //Sets up GET
   try{
     const degree = String(req.query.degree || "").trim(); //Gets the degree being looked for
 
