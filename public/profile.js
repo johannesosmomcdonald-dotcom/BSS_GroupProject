@@ -1,20 +1,22 @@
+// code for unique profiles
+
 document.addEventListener("DOMContentLoaded", () => { 
   const form = document.querySelector("#profileForm");
   const statusMessage = document.querySelector("#statusMessage");
   const backBtn = document.querySelector("#backBtn");
 
-  async function loadProfile() {
+  async function loadProfile() { 
     try {
-      const response = await fetch("/api/dashboard");
+      const response = await fetch("/api/dashboard"); // fetch dashboard
       const result = await response.json();
 
       if (!response.ok) {
-        throw new Error(result.error || "Could not load profile");
+        throw new Error(result.error || "Could not load profile"); // basic profile check
       }
 
-      const user = result.user;
+      const user = result.user; // user = user
 
-      document.querySelector("#first_name").value = user.first_name || "";
+      document.querySelector("#first_name").value = user.first_name || ""; // loads user values
       document.querySelector("#last_name").value = user.last_name || "";
       document.querySelector("#date_of_birth").value = user.date_of_birth
         ? String(user.date_of_birth).split("T")[0]
@@ -27,7 +29,7 @@ document.addEventListener("DOMContentLoaded", () => {
       document.querySelector("#phone_num").value = user.phone_num || "";
       document.querySelector("#description").value = user.description || "";
     } catch (error) {
-      console.error("Profile load error:", error);
+      console.error("Profile load error:", error); // time error check
       statusMessage.textContent = error.message;
       setTimeout(() => {
         window.location.href = "/login.html";
@@ -35,7 +37,7 @@ document.addEventListener("DOMContentLoaded", () => {
     }
   }
 
-  form.addEventListener("submit", async (event) => {
+  form.addEventListener("submit", async (event) => { // form event listner for updating user details
     event.preventDefault();
 
     const userData = {
@@ -51,7 +53,7 @@ document.addEventListener("DOMContentLoaded", () => {
       description: document.querySelector("#description").value.trim()
     };
 
-    try {
+    try { // 
       const response = await fetch("/api/me", {
         method: "PUT",
         headers: {
@@ -73,7 +75,7 @@ document.addEventListener("DOMContentLoaded", () => {
     }
   });
 
-  backBtn.addEventListener("click", () => {
+  backBtn.addEventListener("click", () => { // code for backbutton
     window.location.href = "/dashboard.html";
   });
 

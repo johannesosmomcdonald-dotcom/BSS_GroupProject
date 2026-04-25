@@ -23,6 +23,20 @@
       <button id="editDetailsBtn" type="button">View / Update My Details</button>
     </section>
 
+    <section>
+      <h2>Find Other Users</h2>
+
+      <form id="userSearchForm">
+        <label for="degreeSearch">Search by degree or subject</label>
+        <input type="text" id="degreeSearch" name="degreeSearch" placeholder="e.g. Computer Science, BSc, Business"
+          required />
+        <button type="submit">Search</button>
+      </form>
+
+      <p id="searchMessage"></p>
+      <div id="searchResults"></div>
+    </section>
+
     <button id="logoutBtn">Log out</button>
     <p id="message"></p>
   </main>
