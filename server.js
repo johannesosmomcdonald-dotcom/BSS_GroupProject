@@ -31,9 +31,9 @@ const app = express();
 ////////////////////////////////////////////////////////////////////////////////////////////
 /////////////////////////////////////////////////////////////////////////////////////////////
 // app.use(express.json()); tells express to parse incoming requests off JSON data so that when JSON is sent from the body it becomes available as req.body
-app.use(express.json()); 
+app.use(express.json());
 //////////////////////////////////////////////////
-app.use(express.urlencoded({ extended: true })); 
+app.use(express.urlencoded({ extended: true }));
 //Tells express to parse urlencoded data that comes from the html forms into req.body that can be used 
 // the extended: true is included so that it can parse more complex structures instead of simple key pair values if nessicary
 
@@ -120,27 +120,29 @@ app.get("/users", async (req, res) => { // /users used to represent what it look
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 //GET for searching other users
 app.get("/api/users/search", requireLogin, async (req, res) => { //Sets up GET
-  try{
+  try {
     const degree = String(req.query.degree || "").trim(); //Gets the degree being looked for
 
-    if(!degree) { // checks for search term 
-      return res.status(400).json({ error : "Please enter a seach term"});
+    if (!degree) { // checks for search term 
+      return res.status(400).json({ error: "Please enter a seach term" });
     }
 
-     const result = await pool.query( // POSTGRES query
+    const result = await pool.query( // POSTGRES query
       `SELECT id, first_name, last_name, subject, degree_type, year_of_study_currunt, email, phone_num, description
        FROM users
        WHERE id != $1
        AND (
          LOWER(subject) LIKE LOWER($2) OR LOWER(degree_type) LIKE LOWER($2)
        )
-       ORDER BY first_name,`
+       ORDER BY first_name,`,
       [req.session.userId, `%${degree}%`]
     );
-    } catch (error) { // Catch again
+
+    res.json({ users: result.rows });
+  } catch (error) { // Catch again
     console.error("User search error:", error); // for console 
     res.status(500).json({ error: "Server error" });// for user
-  
+
   }
 })
 
@@ -368,7 +370,7 @@ app.post("/login", async (req, res) => {
     const password = String(req.body.password || "");
 
     if (!email || !password) { //ensures both fields are entered 
-      return res.status(400).json({ error: "Email and password are required" }); 
+      return res.status(400).json({ error: "Email and password are required" });
     }
 
     const result = await pool.query( // finds user in database
@@ -411,7 +413,7 @@ app.post("/login", async (req, res) => {
 app.post("/logout", (req, res) => { // path POST for logout
   req.session.destroy((err) => { // destroys session
     if (err) { // error messages if cant log out/ unable to destroy session
-      console.error("Logout error:", err); 
+      console.error("Logout error:", err);
       return res.status(500).json({ error: "Could not log out" });
     }
 
