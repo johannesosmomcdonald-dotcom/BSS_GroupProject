@@ -118,6 +118,33 @@ app.get("/users", async (req, res) => { // /users used to represent what it look
 }); // use of try catch to catch errors
 
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+//GET for searching other users
+app.get("api/users/search", requireLogin, async (req, res) => { //Sets up GET
+  try{
+    const degree = String(req.query.degree || "").trim(); //Gets the degree being looked for
+
+    if(!degree) { // checks for search term 
+      return res.status(400).json({ error : "Please enter a seach term"});
+    }
+
+     const result = await pool.query( // POSTGRES query
+      `SELECT id, first_name, last_name, subject, degree_type, year_of_study_currunt, email, phone_num, description
+       FROM users
+       WHERE id != $1
+       AND (
+         LOWER(subject) LIKE LOWER($2) OR LOWER(degree_type) LIKE LOWER($2)
+       )
+       ORDER BY first_name,`
+      [req.session.userId, `%${degree}%`]
+    );
+    } catch (error) { // Catch again
+    console.error("User search error:", error); // for console 
+    res.status(500).json({ error: "Server error" });// for user
+  
+  }
+})
+
+//////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 // GET for unique dashboard
 app.get("/api/dashboard", requireLogin, async (req, res) => { // /api/dashboard represnts a endpoint, requireLogin is used as middleware to ensure only logged in users can access it
   try {

@@ -5,6 +5,10 @@ document.addEventListener("DOMContentLoaded", () => { //same as other  JS files 
   const editDetailsBtn = document.querySelector("#editDetailsBtn");
   const logoutBtn = document.querySelector("#logoutBtn");
   const message = document.querySelector("#message");
+  const userSearchForm = document.querySelector("#userSearchForm");
+  const degreeSearch = document.querySelector("#degreeSearch");
+  const searchResults = document.querySelector("#searchResults");
+  const searchMessage = document.querySelector("#searchMessage");
 
   async function loadDashboard() {
     try {
@@ -66,6 +70,50 @@ document.addEventListener("DOMContentLoaded", () => { //same as other  JS files 
       window.location.href = "/index.html";
     } catch (error) {
       message.textContent = error.message;
+    }
+  });
+
+  function displaySearchResults(users) { // takes the database as a paramater
+    if (!users.length) {
+      searchResults.innerHTML = "";
+      searchMessage.textContent = "No users found for that degree.";
+      return; // returns message if no users found in database tfor that degree
+    }
+
+    searchMessage.textContent = `${users.length} user(s) found`; // message sent through if users found
+
+    // uses map to go through each user, stes up a article for each user with their data info
+    searchResults.innerHTML = users.map(user => ` 
+    <article class="user-card">
+      <h3>${user.first_name} ${user.last_name}</h3>
+      <p><strong>Subject:</strong> ${user.subject}</p>
+      <p><strong>Degree type:</strong> ${user.degree_type}</p>
+      <p><strong>Year of study:</strong> ${user.year_of_study_currunt}</p>
+      <p><strong>Email:</strong> ${user.email}</p>
+      <p><strong>Phone:</strong> ${user.phone_num || "Not provided"}</p>
+      <p><strong>Description:</strong> ${user.description || "No description"}</p>
+    </article>
+  `).join(""); // joins them all together
+  }
+
+  userSearchForm.addEventListener("submit", async (event) => { // event listener for when button clicked hence async 
+    event.preventDefault(); // tells event that it is being expicetly handled hence no need to do default action of type input
+
+    try {
+      searchMessage.textContent = "Searching...";
+      searchResults.innerHTML = ""; // updating messages on displayed
+
+      const degree = degreeSearch.value.trim(); // creating degree var used in Server JS built previously
+      const response = await fetch(`/api/users/search?degree=${encodeURIComponent(degree)}`); // standard fetch request
+      const result = await response.json(); // var for the result of a searcg
+
+      if (!response.ok) { // if response is unsuccesful return a failed search message
+        throw new Error(result.error || "Search failed");
+      }
+
+      displaySearchResults(result.users); // if response is good display users
+    } catch (error) {
+      searchMessage.textContent = error.message; // catch for erros to display for user sake
     }
   });
 
