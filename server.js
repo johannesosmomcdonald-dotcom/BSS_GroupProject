@@ -8,13 +8,23 @@ const { Pool } = require("pg"); // imports the pool class. A pool being a class 
 const bcrypt = require("bcrypt"); // imports bcrypt which is used to hash passwords
 const session = require("express-session") // imports middleware to handle user sessions. Used for managing unique dashboards by remembering users between requests.
 const pgSession = require("connect-pg-simple")(session); // imports connect-pg-simple that stores session data within the database instead of short term memory. session needs to be imported first
+
 ////////////////////////////////////////////////////////////////////////////////////////
 ////////////////////////////////////////////////////////////////////////////////////////
 // code in this box loads enviroments from the .env file that stores security data meant to be protected
 // loads them into process.env 
 
-
 require("dotenv").config();
+
+////////////////////////////////////////////////////////////////////////////////////////
+////////////////////////////////////////////////////////////////////////////////////////
+// code in this box is used to create the const for connecting to Resend.
+// an email delivery platform which will be used for our email verfication system
+// in both the sign in and log in.
+
+const { Resend } = require("resend"); // imports resend allowing for email verfication
+const crypto = require("crypto"); // imports crypto which will be used to create tokens for email verfication
+const resend = new Resend(process.env.RESEND_API_KEY);// loads our protected data that being a key provided by Resend which will be used to authenticate our requests
 
 ///////////////////////////////////////////////////////////////////////////////////////
 ///////////////////////////////////////////////////////////////////////////////////////
@@ -324,13 +334,17 @@ app.post("/users", async (req, res) => { //sets up POST request, asyncronous as 
 
     const password_hash = await bcrypt.hash(password, 12);
 
-    //query uses placeholders to prevent SQL injection 
+    // we will also generate a token with an experation date in our database for our verfication process
+    const verf_token = crypto.randomBytes(32).toString("hex");
+    const verf_token_expire = new Date(Date.now() + 1000 * 60 * 60 * 24);
+
+    //query uses placeholders to prevent SQL injection however we make email_verf false because all users will not be verfied when they first make there accounts
     // returned statement has no hash
 
     const result = await pool.query( // query inserting into database
       `INSERT INTO users
-        (first_name, last_name, date_of_birth, gender, subject, degree_type, year_of_study_currunt, email, phone_num, description, password_hash)
-       VALUES ($1,$2,$3,$4,$5,$6,$7,$8,$9,$10,$11)
+        (first_name, last_name, date_of_birth, gender, subject, degree_type, year_of_study_currunt, email, phone_num, description, password_hash, email_verif, verif_token, verif_token_expires)
+       VALUES ($1,$2,$3,$4,$5,$6,$7,$8,$9,$10,$11,false,$12,$13)
        RETURNING id, first_name, last_name, date_of_birth, gender, subject, degree_type, year_of_study_currunt, email, phone_num, description;`,
       [
         first_name,
@@ -344,6 +358,8 @@ app.post("/users", async (req, res) => { //sets up POST request, asyncronous as 
         phone_num,
         description,
         password_hash,
+        verf_token,
+        verf_token_expire
       ]
     );
 
