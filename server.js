@@ -23,9 +23,19 @@ const pgSession = require("connect-pg-simple")(session); // imports connect-pg-s
 // an email delivery platform which will be used for our email verfication system
 // in both the sign in and log in.
 
-const { Resend } = require("resend"); // imports resend allowing for email verfication
+//const { Resend } = require("resend"); // imports resend allowing for email verfication
+//const resend = new Resend(process.env.RESEND_KEY);// loads our protected data that being a key provided by Resend which will be used to authenticate our requests
+
 const crypto = require("crypto"); // imports crypto which will be used to create tokens for email verfication
-const resend = new Resend(process.env.RESEND_KEY);// loads our protected data that being a key provided by Resend which will be used to authenticate our requests
+const nodemailer = require("nodemailer");
+
+const transporter = nodemailer.createTransport({
+  service: "gmail",
+  auth: {
+    user: process.env.EMAIL_USER,
+    pass: process.env.EMAIL_PASS,
+  },
+});
 
 ///////////////////////////////////////////////////////////////////////////////////////
 ///////////////////////////////////////////////////////////////////////////////////////
@@ -402,9 +412,9 @@ app.post("/users", async (req, res) => { //sets up POST request, asyncronous as 
     );
 
     //after we have inserted the user into the database, we need to send the verfication email to our user 
-    const verf_link = `https://bss-groupproject.onrender.com/verify_email?token=${verf_token}`
+    const verf_link = `https://bss-groupproject.onrender.com/verify_email?token=${verf_token}`;
 
-    await resend.emails.send({
+   /*  await resend.emails.send({
       from: "STEP <onboarding@resend.dev>",
       to: [email],
       subject: "verfication of sign in",
@@ -414,6 +424,17 @@ app.post("/users", async (req, res) => { //sets up POST request, asyncronous as 
         <p><a href="${verf_link}">Verify my email</a></p>
         <p>This link expires in 24 hours.</p>
         `,
+    }); */
+
+    await transporter.sendMail({
+      from: `"STEP" <${process.env.EMAIL_USER}>`,
+      to: email,
+      subject: "Verfication to Sign In:",
+      html:`
+        <h2>Welcome to BSS, ${first_name}!</h2>
+        <p>Please verify your email address by clicking the link below:</p>
+        <p><a href="${verf_link}">Verify my email</a></p>
+        <p>This link expires in 24 hours.</p>`,
     });
 
     res.json(result.rows[0]); //sends response of new data in JSON
