@@ -138,7 +138,7 @@ app.get("/api/users/search", requireLogin, async (req, res) => { //Sets up GET
 
 
     if (!degree) { // checks for search term 
-      return res.status(400).json({ error: "Please enter a search term" }); 
+      return res.status(400).json({ error: "Please enter a search term" });
     }
 
     const result = await pool.query( // POSTGRES query
@@ -231,9 +231,9 @@ app.get("/verify_email", async (req, res) => {
     const token = String(req.query.token).trim();
 
     if (!token) {
-        return res.status(400).json({ error: "no token " });
+      return res.status(400).json({ error: "no token " });
     }
-    
+
     const result = await pool.query(
       `SELECT id, verif_token_expires FROM users
        WHERE verif_token = $1`, [token]
@@ -406,30 +406,34 @@ app.post("/users", async (req, res) => { //sets up POST request, asyncronous as 
     //after we have inserted the user into the database, we need to send the verfication email to our user 
     const verf_link = `https://bss-groupproject.onrender.com/verify_email?token=${verf_token}`;
 
-   /*  await resend.emails.send({
-      from: "STEP <onboarding@resend.dev>",
-      to: [email],
-      subject: "verfication of sign in",
-      html:` 
-        <h2>Welcome to BSS, ${first_name}!</h2>
-        <p>Please verify your email address by clicking the link below:</p>
-        <p><a href="${verf_link}">Verify my email</a></p>
-        <p>This link expires in 24 hours.</p>
-        `,
-    }); */
+    /*  await resend.emails.send({
+       from: "STEP <onboarding@resend.dev>",
+       to: [email],
+       subject: "verfication of sign in",
+       html:` 
+         <h2>Welcome to BSS, ${first_name}!</h2>
+         <p>Please verify your email address by clicking the link below:</p>
+         <p><a href="${verf_link}">Verify my email</a></p>
+         <p>This link expires in 24 hours.</p>
+         `,
+     }); */
 
     await transporter.sendMail({
       from: `"STEP" <${process.env.EMAIL_USER}>`,
       to: email,
       subject: "Verfication to Sign In:",
-      html:`
+      html: `
         <h2>Welcome to BSS, ${first_name}!</h2>
         <p>Please verify your email address by clicking the link below:</p>
         <p><a href="${verf_link}">Verify my email</a></p>
         <p>This link expires in 24 hours.</p>`,
     });
 
-    res.json(result.rows[0]); //sends response of new data in JSON
+    //res.json(result.rows[0]); //sends response of new data in JSON
+    return res.status(201).json({
+      message: "Account created successfully",
+      user: result.rows[0]
+    });
   } catch (err) {
     console.error("code:", err.code);
     console.error("constraint:", err.constraint);
@@ -475,7 +479,7 @@ app.post("/login", async (req, res) => {
     }
 
     if (!user.email_verif) {
-      return res.status(403).json({error: "Please verify your email first"});
+      return res.status(403).json({ error: "Please verify your email first" });
     }
 
     req.session.userId = user.id; // stores id in session 
