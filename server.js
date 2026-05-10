@@ -224,6 +224,43 @@ app.get("/api/me", async (req, res) => { // defines GET route
 //////////////////////////////////////////////////////////////////////
 /////////////////////////////////////////////////////////////////////
 
+app.get("/verify_email", async (req, res) => {
+  try {
+    const token = String(req.query.token).trim();
+
+    if (!token) {
+        return res.status(400).json({ error: "no token " });
+    }
+    
+    const result = await pool.query(
+      `SELECT id, verif_token_expires FROM users
+       WHERE verif_token = $1`, [token]
+    );
+
+    if (result.rows.length === 0) {
+      return res.status(400).send("Invalid verification link");
+    }
+
+    const user = result.rows[0];
+
+    if (new Date(user.verf_token_expire) < new Date()) {
+      return res.status(400).send("Verification link expired");
+    }
+
+    await pool.query(
+      `UPDATE users
+       SET email_verif = true, verif_token = NULL, verif_token_expires = NULL
+       WHERE id = $1`, [user.id]
+    );
+
+    res.send("Email verified successfully");
+
+  } catch (error) {
+    console.error("Verification error:", error);
+    res.status(500).send("Server error");
+  }
+});
+
 app.put("/api/me", requireLogin, async (req, res) => { // defines a PUT request thats used for updating data 
   try {
     const first_name = String(req.body.first_name || "").trim();
@@ -364,6 +401,16 @@ app.post("/users", async (req, res) => { //sets up POST request, asyncronous as 
       ]
     );
 
+    //after we have inserted the user into the database, we need to send the verfication email to our user 
+    const verf_link = 'https://bss-groupproject.onrender.com/email_verify?token${verf_token}'
+
+    await resend.emails.send({
+      from: "STEP <onboarding@resend.dev>",
+      to: [email],
+      subject: "verfication of sign in",
+      html:
+        <><h1>Welcome to STEP</h1><p><a href="${verf_link}">verify my email</a>h</p></>,
+    })
     res.json(result.rows[0]); //sends response of new data in JSON
   } catch (err) {
     console.error("code:", err.code);
@@ -407,6 +454,10 @@ app.post("/login", async (req, res) => {
 
     if (!passwordMatch) {
       return res.status(401).json({ error: "Invalid email or password" }); // error message if passwords dont match
+    }
+
+    if (!user.email_verif) {
+      return res.status(403).json({error: "Please verify your email first"});
     }
 
     req.session.userId = user.id; // stores id in session 
