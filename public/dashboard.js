@@ -1,14 +1,8 @@
 document.addEventListener("DOMContentLoaded", () => { //same as other  JS files in /public
   // fetching from html dashboard
-<<<<<<< HEAD
-  const welcomeText = document.querySelector("#welcomeText");
-  const profileList = document.querySelector("#profileList");
-  const editDetailsBtn = document.querySelector("#editDetailsBtn");
-=======
   //const welcomeText = document.querySelector("#welcomeText"); don't need anymore
   const profileList = document.querySelector("#profileList");
   //const editDetailsBtn = document.querySelector("#editDetailsBtn"); don't need anymore
->>>>>>> 143a869 (merging a mix of Hannahs and Toms work)
   const logoutBtn = document.querySelector("#logoutBtn");
   const message = document.querySelector("#message");
   const userSearchForm = document.querySelector("#userSearchForm");
@@ -79,32 +73,19 @@ document.addEventListener("DOMContentLoaded", () => { //same as other  JS files 
     }
   });
 
-<<<<<<< HEAD
-=======
   // added the ability to view profile of an expert
->>>>>>> 143a869 (merging a mix of Hannahs and Toms work)
   function displaySearchResults(users) { // takes the database as a paramater
     if (!users.length) {
       searchResults.innerHTML = "";
       searchMessage.textContent = "No users found for that degree.";
-<<<<<<< HEAD
-      return; // returns message if no users found in database tfor that degree
-=======
       return; // returns message if no users found in database for that degree
->>>>>>> 143a869 (merging a mix of Hannahs and Toms work)
     }
 
     searchMessage.textContent = `${users.length} user(s) found`; // message sent through if users found
 
-<<<<<<< HEAD
-    // uses map to go through each user, stes up a article for each user with their data info
-    searchResults.innerHTML = users.map(user => ` 
-    <article class="user-card">
-=======
     // uses map to go through each user, sets up an article for each user with their data info
     searchResults.innerHTML = users.map(user => ` 
     <article class="user-card" style="border: 1px solid #ddd; padding: 15px; border-radius: 8px; margin-bottom: 15px;">
->>>>>>> 143a869 (merging a mix of Hannahs and Toms work)
       <h3>${user.first_name} ${user.last_name}</h3>
       <p><strong>Subject:</strong> ${user.subject}</p>
       <p><strong>Degree type:</strong> ${user.degree_type}</p>
@@ -112,16 +93,12 @@ document.addEventListener("DOMContentLoaded", () => { //same as other  JS files 
       <p><strong>Email:</strong> ${user.email}</p>
       <p><strong>Phone:</strong> ${user.phone_num || "Not provided"}</p>
       <p><strong>Description:</strong> ${user.description || "No description"}</p>
-<<<<<<< HEAD
-    </article>
-=======
 
     <a href="expert-profile.html?id=${user.id}" class="cta-btn" style="display: inline-block; text-decoration: none; margin-top: 10px; padding: 8px 20px; width: auto;">
         View Profile & Contact
       </a>
   </article>
 
->>>>>>> 143a869 (merging a mix of Hannahs and Toms work)
   `).join(""); // joins them all together
   }
 
@@ -134,11 +111,7 @@ document.addEventListener("DOMContentLoaded", () => { //same as other  JS files 
 
       const degree = degreeSearch.value.trim(); // creating degree var used in Server JS built previously
       const response = await fetch(`/api/users/search?degree=${encodeURIComponent(degree)}`); // standard fetch request
-<<<<<<< HEAD
-      const result = await response.json(); // var for the result of a searcg
-=======
       const result = await response.json(); // var for the result of a search
->>>>>>> 143a869 (merging a mix of Hannahs and Toms work)
 
       if (!response.ok) { // if response is unsuccesful return a failed search message
         throw new Error(result.error || "Search failed");
