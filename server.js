@@ -426,7 +426,7 @@ app.post("/users", async (req, res) => { //sets up POST request, asyncronous as 
          `,
      }); */
 
-    await transporter.sendMail({
+    /*await transporter.sendMail({
       from: `"STEP" <${process.env.EMAIL_USER}>`,
       to: email,
       subject: "Verfication to Sign In:",
@@ -435,7 +435,7 @@ app.post("/users", async (req, res) => { //sets up POST request, asyncronous as 
         <p>Please verify your email address by clicking the link below:</p>
         <p><a href="${verf_link}">Verify my email</a></p>
         <p>This link expires in 24 hours.</p>`,
-    });
+    });*/
 
     //res.json(result.rows[0]); //sends response of new data in JSON
     return res.status(201).json({
