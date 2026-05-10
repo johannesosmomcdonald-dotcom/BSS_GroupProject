@@ -23,7 +23,7 @@ const pgSession = require("connect-pg-simple")(session); // imports connect-pg-s
 // an email delivery platform which will be used for our email verfication system
 // in both the sign in and log in.
 
-//const { Resend } = require("resend"); // imports resend allowing for email verfication
+const { Resend } = require("resend"); // imports resend allowing for email verfication
 //const resend = new Resend(process.env.RESEND_KEY);// loads our protected data that being a key provided by Resend which will be used to authenticate our requests
 
 const crypto = require("crypto"); // imports crypto which will be used to create tokens for email verfication
