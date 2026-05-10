@@ -231,6 +231,25 @@ app.get("/api/me", async (req, res) => { // defines GET route
   }
 });
 
+/////////////////////////////////////////////////////////////////////
+///////////////////////////////////////////////////////////////////////
+
+// GET: Fetches the expert details for their profile page
+app.get("/api/users/:id", requireLogin, async (req, res) => {
+  try {
+    const result = await pool.query(
+      `SELECT id, first_name, last_name, date_of_birth, gender, subject,
+              degree_type, year_of_study_currunt, email, phone_num, description
+       FROM users WHERE id = $1`,
+      [req.params.id]
+    );
+    if (result.rows.length === 0) return res.status(404).json({ error: "User not found" });
+    res.json({ user: result.rows[0] });
+  } catch (error) {
+    res.status(500).json({ error: "Server error" });
+  }
+});
+
 //////////////////////////////////////////////////////////////////////
 /////////////////////////////////////////////////////////////////////
 
