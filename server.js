@@ -243,7 +243,7 @@ app.get("/verify_email", async (req, res) => {
 
     const user = result.rows[0];
 
-    if (new Date(user.verf_token_expire) < new Date()) {
+    if (new Date(user.verf_token_expires) < new Date()) {
       return res.status(400).send("Verification link expired");
     }
 
@@ -402,7 +402,7 @@ app.post("/users", async (req, res) => { //sets up POST request, asyncronous as 
     );
 
     //after we have inserted the user into the database, we need to send the verfication email to our user 
-    const verf_link = 'https://bss-groupproject.onrender.com/email_verify?token${verf_token}'
+    const verf_link = `https://bss-groupproject.onrender.com/verify_email?token=${verf_token}`
 
     await resend.emails.send({
       from: "STEP <onboarding@resend.dev>",
@@ -411,11 +411,11 @@ app.post("/users", async (req, res) => { //sets up POST request, asyncronous as 
       html:` 
         <h2>Welcome to BSS, ${first_name}!</h2>
         <p>Please verify your email address by clicking the link below:</p>
-        <p><a href="${verificationLink}">Verify my email</a></p>
+        <p><a href="${verf_link}">Verify my email</a></p>
         <p>This link expires in 24 hours.</p>
         `,
     });
-    
+
     res.json(result.rows[0]); //sends response of new data in JSON
   } catch (err) {
     console.error("code:", err.code);
@@ -444,7 +444,7 @@ app.post("/login", async (req, res) => {
     }
 
     const result = await pool.query( // finds user in database
-      `SELECT id, first_name, last_name, email, password_hash
+      `SELECT id, first_name, last_name, email, password_hash, email_verif
        FROM users
        WHERE email = $1`,
       [email]
