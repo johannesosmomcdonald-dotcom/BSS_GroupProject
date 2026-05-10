@@ -27,6 +27,7 @@ const pgSession = require("connect-pg-simple")(session); // imports connect-pg-s
 //const resend = new Resend(process.env.RESEND_KEY);// loads our protected data that being a key provided by Resend which will be used to authenticate our requests
 
 const crypto = require("crypto"); // imports crypto which will be used to create tokens for email verfication
+<<<<<<< HEAD
 const nodemailer = require("nodemailer");
 
 const transporter = nodemailer.createTransport({
@@ -36,6 +37,9 @@ const transporter = nodemailer.createTransport({
     pass: process.env.EMAIL_PASS,
   },
 });
+=======
+const resend = new Resend(process.env.RESEND_API_KEY);// loads our protected data that being a key provided by Resend which will be used to authenticate our requests
+>>>>>>> 5a7337c3f47f8709fa0df489605145e77bc22033
 
 ///////////////////////////////////////////////////////////////////////////////////////
 ///////////////////////////////////////////////////////////////////////////////////////

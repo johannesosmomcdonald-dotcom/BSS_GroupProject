@@ -1,10 +1,21 @@
 // code for unique profiles
+<<<<<<< HEAD
 
+=======
+>>>>>>> 143a869 (merging a mix of Hannahs and Toms work)
 document.addEventListener("DOMContentLoaded", () => { 
   const form = document.querySelector("#profileForm");
   const statusMessage = document.querySelector("#statusMessage");
   const backBtn = document.querySelector("#backBtn");
 
+<<<<<<< HEAD
+=======
+  // loading gif
+  const divForm = document.querySelector("#divForm"); 
+  const divLoading = document.querySelector("#divLoading"); 
+  const divSuccess = document.querySelector("#divSuccess"); 
+
+>>>>>>> 143a869 (merging a mix of Hannahs and Toms work)
   async function loadProfile() { 
     try {
       const response = await fetch("/api/dashboard"); // fetch dashboard
@@ -40,6 +51,14 @@ document.addEventListener("DOMContentLoaded", () => {
   form.addEventListener("submit", async (event) => { // form event listner for updating user details
     event.preventDefault();
 
+<<<<<<< HEAD
+=======
+    // start loading gif
+    if (divForm) divForm.style.display = 'none'; 
+    if (divLoading) divLoading.style.display = 'block'; 
+    
+
+>>>>>>> 143a869 (merging a mix of Hannahs and Toms work)
     const userData = {
       first_name: document.querySelector("#first_name").value.trim(),
       last_name: document.querySelector("#last_name").value.trim(),
@@ -66,17 +85,42 @@ document.addEventListener("DOMContentLoaded", () => {
 
       if (!response.ok) {
         throw new Error(result.error || "Could not update details");
+<<<<<<< HEAD
       }
 
       statusMessage.textContent = "Details updated successfully.";
     } catch (error) {
       console.error("Profile update error:", error);
       statusMessage.textContent = error.message;
+=======
+
+      }
+
+    // allows a user interface to succeed
+      if (divLoading) divLoading.style.display = 'none'; 
+      if (divSuccess) divSuccess.style.display = 'block';
+
+      if (statusMessage) statusMessage.textContent = "Details updated successfully."; 
+
+    } catch (error) {
+      console.error("Profile update error:", error);
+      
+      // reset brings user back to the profile
+      if (divLoading) divLoading.style.display = 'none';
+      if (divForm) divForm.style.display = 'block';
+
+      if (statusMessage) statusMessage.textContent = error.message; // added this 
+      alert(error.message); 
+>>>>>>> 143a869 (merging a mix of Hannahs and Toms work)
     }
   });
 
   backBtn.addEventListener("click", () => { // code for backbutton
+<<<<<<< HEAD
     window.location.href = "/dashboard.html";
+=======
+    window.location.href = "dashboard.html"; 
+>>>>>>> 143a869 (merging a mix of Hannahs and Toms work)
   });
 
   loadProfile();
