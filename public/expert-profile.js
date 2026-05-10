@@ -111,21 +111,6 @@ document.addEventListener("DOMContentLoaded", async () => {
 // btw the message will only have the look like it was sent, but not actually.
 
 /*
-// GET: Fetches the expert details for their profile page
-app.get("/api/users/:id", requireLogin, async (req, res) => {
-  try {
-    const result = await pool.query(
-      `SELECT id, first_name, last_name, date_of_birth, gender, subject,
-              degree_type, year_of_study_currunt, email, phone_num, description
-       FROM users WHERE id = $1`,
-      [req.params.id]
-    );
-    if (result.rows.length === 0) return res.status(404).json({ error: "User not found" });
-    res.json({ user: result.rows[0] });
-  } catch (error) {
-    res.status(500).json({ error: "Server error" });
-  }
-});
 
 //POST: Saves a new message to the database
 app.post("/api/messages", requireLogin, async (req, res) => {

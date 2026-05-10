@@ -477,6 +477,19 @@ app.post("/users", async (req, res) => { //sets up POST request, asyncronous as 
   }
 });
 
+app.post("/api/messages", requireLogin, async (req, res) => {
+  try {
+    const { recipientId, message } = req.body;
+    await pool.query(
+      'INSERT INTO messages (sender_id, recipient_id, message_text) VALUES ($1, $2, $3)',
+      [req.session.userId, recipientId, message]
+    );
+    res.json({ message: "Message sent!" });
+  } catch (error) {
+    res.status(500).json({ error: "Server error" });
+  }
+});
+
 // Login route
 app.post("/login", async (req, res) => {
   try {
