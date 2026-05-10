@@ -486,9 +486,9 @@ app.post("/login", async (req, res) => {
       return res.status(401).json({ error: "Invalid email or password" }); // error message if passwords dont match
     }
 
-    if (!user.email_verif) {
-      return res.status(403).json({ error: "Please verify your email first" });
-    }
+    //if (!user.email_verif) {
+    //  return res.status(403).json({ error: "Please verify your email first" });
+    //}
 
     req.session.userId = user.id; // stores id in session 
     req.session.userEmail = user.email; // same with email
