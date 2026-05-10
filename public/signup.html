@@ -1,0 +1,135 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <title>Sign Up</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link href="css/style.css" rel="stylesheet">
+</head>
+
+<body>
+  <header>
+    <a href="index.html" class="logo" style="text-decoration: none; font-weight: 800; font-family: sans-serif; letter-spacing: -2px; display: flex; align-items: center; font-size: 1.7rem;">
+    <span style="color: #01725a;">S</span><span style="color: #333;">TEP</span>
+</a>
+    <nav>
+      <div class="dropdown">
+        <div class="dropbtn bar">
+          <span></span>
+          <span></span>
+          <span></span>
+        </div>
+
+        <div class="dropdown-content">
+          <div class="dropdown-arrow"></div>
+          <a href="login.html">Login</a>
+          <a href="about.html">About Us</a>
+          <a href="contact.html">Contact Us</a>
+        </div>
+      </div>
+    </nav>
+  </header>
+
+  <main class="auth-container">
+    <div class="auth-box">
+      <h1 style="color:#016b54";>Create your account</h1>
+      <p>Join the STEP network. <strong>Brighton students only.</strong></p>
+
+      <form id="signupForm" class="sign_up_Inputs">
+
+        <label for="fname">First name:</label>
+        <input type="text" id="fname" name="fname" required>
+
+        <label for="lname">Last name:</label>
+        <input type="text" id="lname" name="lname" required>
+
+        <label for="dob">Date of birth:</label>
+        <input type="date" id="dob" name="dob" required>
+
+        <label for="gender">Gender:</label>
+        <select id="gender" name="gender" required style="width: 100%; padding: 12px; margin-bottom: 20px;">
+          <option value="" disabled selected>Select a choice</option>
+          <option value="Male">Male</option>
+          <option value="Female">Female</option>
+          <option value="Other">Other</option>
+        </select>
+
+        <label for="degree_type">Degree type:</label>
+        <select id="degree_type" name="degree_type" required style="width: 100%; padding: 12px; margin-bottom: 20px;">
+          <option value="" disabled selected>Select a choice</option>
+          <option value="BSc">BSc</option>
+          <option value="BA">BA</option>
+          <option value="MSc">MSc</option>
+          <option value="MA">MA</option>
+        </select>
+
+        <label for="subject">Primary Subject:</label>
+        <input type="text" id="subject" name="subject" placeholder="e.g. Computer Science" required>
+
+        <label for="studyYear">Year of study:</label>
+        <select id="studyYear" name="studyYear" required style="width: 100%; padding: 12px; margin-bottom: 20px;">
+          <option value="" disabled selected>Select a choice</option>
+          <option value="1">Year 1</option>
+          <option value="2">Year 2</option>
+          <option value="3">Year 3</option>
+          <option value="4">Year 4</option>
+          <option value="5">Year 5</option>
+        </select>
+
+        <label for="email">Email address:</label>
+        <input id="email" type="email" placeholder="Must end in @uni.brighton.ac.uk" required>
+
+        <label for="phone">Phone number:</label>
+        <input type="text" id="phone" name="phone">
+
+       <label for="description">About You (Bio / Expertise):</label>
+      <textarea id="description" name="description" rows="5" class="auth-input-style" placeholder="If you are an Expert, describe how you can help. If you are a Learner, mention what you're looking to achieve."></textarea>
+
+        <label for="password">Password:</label>
+        <input type="password" id="password" name="password" required>
+
+        <div id="divForm" style="width: 100%;">
+          <button type="submit" class="cta-btn" style="width: 100%;">Sign Up</button>
+        </div>
+
+        <div id="divLoading" style="display:none; text-align:center; padding: 20px;">
+          <img src="loading.gif" alt="Signing up..." style="width: 100px;">
+          <p>Creating your account...</p>
+        </div>
+
+        <div id="divSuccess" style="display:none; text-align:center; padding: 20px;">
+          <h2 style="color: green;">Account Created!</h2>
+          <p>Welcome to STEP. You can now log in.</p>
+          <a href="login.html" class="cta-btn"
+            style="display: inline-block; text-decoration: none; width: 100%; text-align: center;">Go to Login</a>
+        </div>
+      </form> 
+      <button id="backBtn" type="button" onclick="window.location.href='index.html'" class="cta-btn" style="background: #666; margin-top: 10px; width: 100%;">Back</button>
+
+      <p class="auth-switch">Already have an account? <a href="login.html">Login here</a></p>
+  </main>
+
+  <button id="goToTopBtn" title="Go to top">
+    <img src="up.png" alt="Top" style="width: 20px; height: 20px;">
+  </button>
+
+  <footer>
+    <div>
+    <a href="contact.html">Contact Us</a>
+    <a href="guidelines.html">Guidelines</a>
+    <a href="privacy.html">Privacy Policy</a>
+    <a href="terms.html">Terms of Service</a>
+    <a href="https://unibrightonac.sharepoint.com/" target="_blank" style="font-size: 0.75rem; opacity: 0.8; margin-top: 5px;">MyBrighton</a>
+  </div>
+
+  <div style="margin-top: 20px; font-size: 0.8rem; color: #01725a; width: 100%; padding-top: 2px;">
+    © 2026, STEP — University of Brighton.
+  </div>
+  </footer>
+
+  <script src="javascript/signup.js"></script>
+  <script src="javascript/top.js"></script>
+</body>
+
+</html>

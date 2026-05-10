@@ -1,0 +1,915 @@
+body {
+  font-family: Arial, sans-serif;
+  color: #333;
+  margin: 0;
+  line-height: 1.6;
+}
+
+header {
+  display: flex;
+  justify-content: space-between; /* creates the gap between logo and nav */
+  align-items: center;            /* centers items vertically */
+  padding: 20px 50px;             /* adds breathing room for both sides */
+  background: #f4f4f4;
+  border-bottom: 1px solid #ccc;
+}
+
+nav {
+  display: flex;
+  align-items: center;
+  gap: 20px;                      /* adds even spacing between the links and button */
+}
+
+/* Dropdown bar trigger */
+.bar {
+  width: 30px;
+  height: 20px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  cursor: pointer;
+  padding: 10px 0; /* creates a larger hover area */
+}
+
+.bar span {
+  display: block;
+  height: 3px;
+  width: 100%;
+  background-color: #333; /* color of the 3 lines */
+  border-radius: 3px;
+}
+
+/* --- Dropdown navbar style --- */
+.dropdown {
+  position: relative;
+  display: inline-block;
+}
+
+/* The hidden menu */
+.dropdown-content {
+  display: none;
+  position: absolute;
+  background-color: #ffffff;
+  min-width: 130px;
+  border-radius: 8px;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15);
+  border: 2px solid #ddd;
+  
+  top: 45px; 
+  left: 20%;                 /* pulls the starting point to the left */
+  transform: translateX(-80%); /* offsets it so more of the box is on the left side */
+  z-index: 1000;
+}
+
+.dropdown-arrow {
+  position: absolute;
+  top: -6px;
+  left: 80%;                 
+  transform: translateX(-50%) rotate(45deg);
+  
+  width: 10px;
+  height: 10px;
+  background-color: #fff;
+  border-left: 1px solid #ddd;
+  border-top: 1px solid #ddd;
+}
+
+/* Links inside the dropdown */
+.dropdown-content a {
+  color: #333;
+  padding: 12px 15px;
+  text-decoration: none;
+  display: block;
+  font-size: 0.85rem;
+  text-align: center;
+  border-bottom: 1px solid #eee;
+  font-weight: bold; 
+}
+
+.dropdown-content a:last-of-type {
+  border-bottom: none;
+}
+
+/* Hover effects */
+.dropdown-content a:hover {
+  background-color: #01725a;;
+  color: #000;
+  border-radius: 8px; /* keeps corners smooth on hover */
+}
+
+/* Show the menu when hovering over the dropdown div */
+.dropdown:hover .dropdown-content {
+  display: block;
+}
+
+/* Invisible bridge to prevent disappearing while moving mouse */
+.dropdown::after {
+  content: "";
+  position: absolute;
+  top: 100%;
+  left: 0;
+  width: 100%;
+  height: 25px;
+}
+
+.step {
+  text-align: center;
+  padding: 100px 20px;
+  background: #eee;
+}
+
+.step h1 {
+  color:#015240;
+}
+
+
+.features {
+  display: flex;
+  justify-content: space-around;
+  padding: 50px;
+}
+
+.card {
+  width: 30%;
+  padding: 20px;
+  border: 2px solid #ccc;
+  text-align: center;
+}
+
+.faq {
+  max-width: 800px;
+  margin: 50px auto;
+  padding: 0 20px;
+}
+
+details {
+  background: #f9f9f9;
+  padding: 10px;
+  margin-bottom: 10px;
+  border: 1px solid #ddd;
+}
+
+summary {
+  font-weight: bold;
+  cursor: pointer;
+}
+
+footer {
+  text-align: center;
+  padding: 20px;
+  background: #333;
+  color: white;
+  width: 100;
+  padding-bottom: auto;
+}
+
+footer a {
+  color: #ccc;
+  margin: 0 10px;
+  text-decoration: none;
+}
+
+/* --- Subject discovery styles --- */
+.subjects {
+  padding: 50px 20px;
+  text-align: center;
+  background-color: #fff; 
+  border-top: 1px solid #eee;
+}
+
+.subjects h2 {
+  color:#02523f;
+}
+
+.subject-grid {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 15px;
+  margin: 30px 0;
+}
+
+.subject-badge {
+  padding: 8px 20px;
+  border: 1px solid #ccc;
+  background-color: #f9f9f9;
+  border-radius: 4px;
+  font-size: 0.9rem;
+  color: #555;
+  cursor: default; /* signals to user this is not a button */
+}
+
+.subject-tag {
+  padding: 10px 25px;
+  border: 2px solid #333; /* stronger border for grayscale button look */
+  background: none;
+  cursor: pointer;
+  border-radius: 25px; 
+  font-family: 'Strait', sans-serif; 
+  font-size: 1rem;
+  transition: 0.3s;
+}
+
+.subject-tag:hover {
+  background-color: #333;
+  color: #fff;
+}
+
+
+/* --- About us styles --- */
+.about-container {
+  max-width: 1000px;
+  margin: 0 auto;
+  padding: 40px 20px;
+}
+
+.mission {
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+.mission p {
+  font-size: 1.2rem;
+  max-width: 800px;
+  margin: 20px auto;
+}
+
+.team {
+  text-align: center;
+}
+
+/* Container for the team members */
+.team-grid {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 20px;
+}
+
+/* Individual card styling */
+.team-card {
+  flex: 1;
+  min-width: 250px;
+  max-width: 300px;
+  border: 1px solid #ccc;
+  padding: 30px 20px;
+  margin-bottom: 20px;
+  background: #f9f9f9;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+}
+
+/* Professional circle avatars */
+.team-avatar {
+  width: 110px;
+  height: 110px;
+  object-fit: cover; /* keeps faces from stretching */
+  border-radius: 50%;
+  border: 3px solid #333;
+  margin-bottom: 15px;
+  background-color: #ddd; /* placeholder color if image fails to load */
+}
+
+/* Might use for images later on */
+.avatar-placeholder img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: 1;
+}
+
+/* --- Individual quote styling --- */
+.individual-quote {
+  font-style: italic;
+  font-size: 0.9rem;
+  color: #444;
+  margin-top: 15px;
+  padding-top: 10px;
+  border-top: 1px solid #eee; /* subtle line to separate bio from quote */
+  line-height: 1.4;
+}
+
+.role {
+  font-weight: bold;
+  font-size: 0.85rem;
+  color: #666;
+}
+
+/* Personal (Why) quote styling */
+.individual-quote {
+  font-style: italic;
+  font-size: 0.95rem;
+  line-height: 1.5;
+  color: #444;
+  margin-top: 15px;
+  padding-top: 15px;
+  border-top: 1px solid #ddd; /* subtle line to separate bio from quote */
+  position: relative;
+}
+
+/* Adds tiny decorative quote marks */
+.individual-quote::before {
+  content: '"';
+  font-size: 2rem;
+  color: #ccc;
+  position: absolute;
+  top: -10px;
+  left: 45%;
+}
+
+/* --- Guidelines styles --- */
+.guidelines-container {
+  max-width: 900px;
+  margin: 0 auto;
+  padding: 40px 20px;
+}
+
+.intro {
+  text-align: center;
+  margin-bottom: 40px;
+}
+
+.rules-grid {
+  display: flex;
+  gap: 30px;
+  margin-bottom: 50px;
+}
+
+.rules-card {
+  flex: 1;
+  padding: 25px;
+  border: 1px solid #ccc;
+  background: #f9f9f9;
+}
+
+.rules-card h3 {
+  margin-top: 0;
+  text-decoration: underline;
+}
+
+.rules-card ul {
+  padding-left: 20px;
+}
+
+.rules-card li {
+  margin-bottom: 10px;
+}
+
+.integrity-note {
+  background: #eee;
+  padding: 30px;
+  border-left: 5px solid #333;
+}
+
+.integrity-note h2 {
+  margin-top: 0;
+}
+
+/* --- Privacy and Terms styles --- */
+.legal-container {
+  max-width: 800px;
+  margin: 0 auto;
+  padding: 40px 20px;
+  line-height: 1.8;
+}
+
+.legal-header {
+  text-align: center;
+  border-bottom: 2px solid #333;
+  margin-bottom: 30px;
+  padding-bottom: 10px;
+}
+
+.legal-content h2 {
+  margin-top: 30px;
+  font-size: 1.4rem;
+  color: #000;
+}
+
+.legal-content ul {
+  margin-bottom: 20px;
+}
+
+
+/* --- Authentication styles (Login/Signup) --- */
+.auth-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 80vh;
+    padding: 20px;
+}
+
+.auth-box {
+    width: 100%;
+    max-width: 400px;
+    padding: 40px;
+    border: 2px solid #333;
+    background-color: #fff;
+    text-align: center;
+}
+
+.auth-box h1 {
+    margin-bottom: 10px;
+}
+
+.auth-box form {
+    display: flex;
+    flex-direction: column;
+    text-align: left;
+    margin-top: 20px;
+}
+
+.auth-box label {
+    font-weight: bold;
+    margin-bottom: 5px;
+}
+
+.auth-box input {
+    padding: 12px;
+    margin-bottom: 20px;
+    border: 1px solid #ccc;
+    font-family: inherit;
+}
+
+.auth-switch {
+    margin-top: 20px;
+    font-size: 0.9rem;
+}
+
+.hint {
+    font-size: 0.8rem;
+    color: #666;
+    margin-top: -15px;
+    margin-bottom: 15px;
+    display: block;
+}
+
+/* --- Contact page styles --- */
+#contactForm textarea {
+    resize: vertical; /* allows users to expand the box if needed */
+    border-radius: 4px;
+}
+
+#contactForm label {
+    display: block;
+    margin-top: 10px;
+}
+
+
+/* --- Cookie banner styles--- */
+.cookie-overlay {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    background: rgba(0, 0, 0, 0.9); 
+    color: #fff;
+    padding: 20px 0;
+    z-index: 9999; /* ensures it stays on top of everything */
+    border-top: 2px solid #333;
+    display: none; 
+    opacity: 0;
+    transition: opacity 0.5s ease-in; /* makes cookies banner fade in smoothly */
+}
+
+.cookie-content {
+    max-width: 1100px;
+    margin: 0 auto;
+    padding: 0 50px; /* matches the header padding */
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 20px;
+}
+
+.cookie-content p {
+    margin: 0;
+    font-size: 0.95rem;
+}
+
+.cookie-content a {
+    color: #fff;
+    text-decoration: underline;
+}
+
+.cookie-buttons {
+    display: flex;
+    gap: 15px;
+}
+
+.cookie-btn {
+    padding: 10px 20px;
+    font-weight: bold;
+    cursor: pointer;
+    border: 2px solid #fff;
+    transition: 0.3s ease;
+    font-family: inherit;
+}
+
+.cookie-btn.accept {
+    background-color: #fff;
+    color: #000;
+}
+
+.cookie-btn.accept:hover {
+    background-color: #ccc;
+    border-color: #ccc;
+}
+
+.cookie-btn.decline {
+    background-color: transparent;
+    color: #fff;
+}
+
+.cookie-btn.decline:hover {
+    background-color: rgba(255, 255, 255, 0.1);
+}
+
+/* Responsive adjustment for mobile */
+@media (max-width: 768px) {
+    .cookie-content {
+        flex-direction: column;
+        text-align: center;
+        padding: 0 20px;
+    }
+}
+
+
+/* --- Cta button styles --- */
+.cta-btn {
+  background-color: #000;      /* solid black for a bold look */
+  color: #fff;                 /* white text */
+  padding: 16px 32px;          /* larger, more clickable area */
+  font-size: 1.1rem;           /* slightly larger text */
+  font-weight: bold;
+  border: 2px solid #000;      /* matching border */
+  border-radius: 4px;          /* a professional slight curve */
+  cursor: pointer;
+  transition: all 0.3s ease;   /* smooth animation for the hover */
+  text-transform: uppercase;   /* adds a professional brand feel */
+  letter-spacing: 1px;         /* adds breathing room between letters */
+  box-shadow: 0 4px 6px rgba(0,0,0,0.1); /* subtle depth shadow */
+  display: inline-block;       /* ensures padding and margins work correctly */
+  text-decoration: none;       /* removes the underline if the button is an <a> tag */
+  margin-top: 20px;            /* adds space above the button */
+}
+
+
+.cta-btn:hover {
+  background-color: #333;      /* turns dark grey on hover */
+  border-color: #333;
+  transform: translateY(-2px); /* slightly lifts up when hovered */
+  box-shadow: 0 6px 12px rgba(0,0,0,0.15); /* deeper shadow when lifted */
+}
+
+
+.cta-btn:active {
+  transform: translateY(0);    /* moves back down when clicked */
+}
+
+
+/* --- Go to top button style --- */
+#goToTopBtn {
+  display: none;           /* hidden by default */
+  position: fixed;         /* stays in place */
+  bottom: 85px;            
+  right: 15px;             /* moved further to the right */
+  z-index: 999; 
+  background-color: #000;  
+  border: none;
+  cursor: pointer;
+  width: 40px;             /* smaller circle */
+  height: 40px;            /* smaller circle */
+  border-radius: 50%;      
+  transition: all 0.3s ease;
+  box-shadow: 0 4px 8px rgba(0,0,0,0.3);
+  
+  /* Centering the image */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 0;              /* removes default button padding */
+}
+
+#goToTopBtn:hover {
+  background-color: #333;
+  transform: translateY(-3px); 
+}
+
+#goToTopBtn img {
+  width: 16px;             /* scaled down image for smaller circle */
+  height: 16px;
+  pointer-events: none;
+}
+/* Extra about us style */
+.about-page-content {
+  min-height: 70vh; 
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  padding-bottom: 140px;
+}
+
+/* Unique layout for dashboard only */
+.dashboard-page-content {
+  min-height: 60vh;        
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  padding-bottom: 235px;    
+  max-width: 800px;        
+  margin: 0 auto;          
+}
+
+/* Tighten the boxes on the dashboard */
+.dashboard-page-content .team-card {
+  padding-bottom: 15px 25px;      /* removes the extra part of the box */
+  margin-bottom: 10px;     /* tighter gap between the two sections */
+}
+
+.dashboard-page-content h2 {
+  margin-top: 0;           /* pulls the text to the top of the box */
+}
+
+/* --- Responsive section (Mobile, Tablet and Full-screen) --- */
+
+/* Tablet View (Screens 1024px and smaller) */
+@media (max-width: 1024px) {
+  
+  /* Targets both containers used for About and Dashboard */
+  .legal-container, 
+  .about-page-content,
+  .dashboard-page-content {
+    width: 90% !important;   /* forces it to stay within 90% of the screen width */
+    max-width: 900px;        /* prevents it from being wider than the tablet screen */
+    margin: 0 auto;          /* keeps it perfectly centered */
+    padding-left: 10px;      /* adds a little safety gap on the left */
+    padding-right: 10px;     /* adds a little safety gap on the right */
+    box-sizing: border-box;  /* (Essential!) ensures padding doesn't add to the width */
+  }
+
+  /* Ensure images/cards inside doesn't overflow */
+  .team-card {
+    width: 100%;
+    
+  }
+}
+/* Mobile View (Screens 768px and smaller) */
+@media (max-width: 768px) {
+  header {
+    padding: 15px 20px; /* smaller header for phones */
+  }
+
+  .logo {
+    font-size: 1.1rem;
+  }
+
+  /* Makes the Search box stack vertically on phones */
+  #userSearchForm div {
+    flex-direction: column !important;
+    gap: 10px;
+  }
+
+  /* Make buttons full-width for easier tapping */
+  #userSearchForm button, 
+  #editDetailsBtn {
+    width: 100%;
+    margin-top: 5px;
+  }
+
+  .team-card, .dashboard-card {
+    padding: 15px;
+    margin: 10px 0; /* add a little gap between cards when stacked */
+  }
+
+  h1 {
+    font-size: 1.6rem;
+  }
+}
+
+/* Small Mobile (Screens 480px and smaller) */
+@media (max-width: 480px) {
+  /* Force the main wrapper to never exceed the screen width */
+  html, body {
+    overflow-x: hidden; /* stops the annoying side-scroll */
+    width: 100%;
+  }
+
+  /* Targets (Every) possible container */
+  main, 
+  .legal-container, 
+  .about-page-content, 
+  .dashboard-page-content,
+  .profile-container, 
+  .contact-container {
+    width: 100% !important;
+    max-width: 100% !important;
+    padding: 10px !important;
+    margin: 0 !important;
+    box-sizing: border-box !important;
+  }
+
+  /* Fix the white cards/sections */
+  .team-card, .dashboard-card, .contact-card, .profile-card, section {
+    width: 100% !important;
+    max-width: 100% !important;
+    margin: 10px 0 !important;
+    padding: 15px !important;
+    box-sizing: border-box !important;
+  }
+
+  /* Fix forms and Inputs - fixes the issues in contact/profile */
+  form, .form-group {
+    width: 100% !important;
+  }
+
+  input, textarea, select {
+    width: 100% !important; /* forces inputs to stay inside the box */
+    font-size: 16px !important; 
+    box-sizing: border-box !important;
+  }
+
+  /* The header - logo and nav */
+  header {
+    padding: 10px !important;
+    flex-direction: row; 
+    justify-content: space-between;
+  }
+
+  .logo {
+    font-size: 0.9rem !important;
+  }
+
+  /* Footer fix */
+  footer {
+    display: flex;
+    flex-direction: column !important;
+    gap: 10px;
+    padding: 20px 10px !important;
+    text-align: center;
+  }
+
+  /* Specific fix for contact page */
+  .auth-box[style] {
+    max-width: 100% !important;
+    width: 100% !important;
+    padding: 20px !important;
+    margin: 0 !important;
+    box-sizing: border-box !important;
+  }
+
+  #contactForm {
+    width: 100% !important;
+  }
+
+  /* Forces the text area to respect the container width */
+  #contactForm textarea {
+    width: 100% !important;
+    max-width: 100% !important;
+    box-sizing: border-box !important;
+  }
+}
+
+/* --- Team card and avatar alignment fix --- */
+.avatar-placeholder {
+  width: 110px;
+  height: 110px;
+  background-color: #ddd;
+  border-radius: 50%;
+  margin: 0 auto 15px;
+  position: relative;
+  overflow: hidden;
+  display: flex;          
+  align-items: center;    
+  justify-content: center;
+  border: 2px solid #333;
+}
+
+.avatar-placeholder h3 {
+  margin: 0;
+  font-size: 0.9rem;
+  color: #333;
+  z-index: 2;
+  position: relative;
+  pointer-events: none;
+}
+
+/* Styles the personal quotes */
+.individual-quote {
+  font-style: italic;
+  font-size: 0.9rem;
+  color: #444;
+  margin-top: 15px;
+  padding-top: 10px;
+  border-top: 1px solid #eee;
+  line-height: 1.4;
+}
+
+.role {
+  font-weight: bold;
+  font-size: 0.85rem;
+  color: #666;
+}
+
+/* --- Dashboard repair css --- */
+/* Reset the main container to center everything on desktop */
+.dashboard-page-content {
+    display: block !important;
+    max-width: 800px !important; 
+    margin: 40px auto !important; /* centers the whole dashboard */
+    padding: 0 20px !important;
+    padding-bottom: 100px !important;
+}
+
+/* Targets the .auth-box specifically when it's inside the dashboard */
+/* Overrides the 400px limit from above */
+.dashboard-page-content .auth-box, 
+.dashboard-page-content .team-card {
+    max-width: 100% !important;   
+    width: 100% !important;       
+    margin: 0 0 10px 0 !important;/* adds space between the search bar and details */
+    display: block !important;    /* ensures cards stack vertically */
+    padding: 35px !important;
+    box-sizing: border-box !important;
+    text-align: left !important;
+}
+
+/* Fixes the search bar alignment inside the card */
+#userSearchForm div {
+    display: flex !important;
+    gap: 15px !important;
+}
+
+#userSearchForm input {
+    flex: 1 !important;
+}
+
+/* --- Fixes the login button slimmer to be slimmer --- */
+/* Targets the login button specifically within the auth box */
+.auth-box form button, 
+.auth-box form input[type="submit"] {
+    display: block !important;    /* allows the button to behave like a layout block */
+    width: 100% !important;       /* forces it to stretch to the right edge */
+
+}
+
+/* --- Smaller logout button --- */
+.dropdown-content #logoutBtn {
+    width: auto !important;      /* removes the 100% width */
+    padding: 10px 15px !important; /* significantly smaller padding */
+    font-size: 1rem !important; /* smaller text to match dropdown links */
+    margin: 10px auto !important; /* centers it and adds a small gap */
+    display: block !important;    /* keeps it as a block to allow centering */
+}
+
+/* Makes the bio/description box match the other inputs */
+#description {
+    width: 100% !important;
+    padding: 12px !important;
+    border: 1px solid #ccc !important;
+    border-radius: 4px !important;
+    font-family: inherit !important;
+    font-size: 1rem !important;
+    box-sizing: border-box !important;
+    resize: vertical; /* allows a user to expand the box to write more */
+    margin-bottom: 20px !important;
+}
+
+/* Dashboard reward system */ 
+/* Container to allow side by side layout */
+.dashboard-grid-container {
+    display: flex !important;
+    gap: 20px !important;
+    align-items: flex-start !important; /* prevents the left box from stretching vertically */
+}
+
+/* Fixes the width of the STEP Rewards sidebar */
+.level-sidebar {
+    flex: 0 0 250px !important; /* a fixed width */
+    margin: 0 !important;
+}
+
+/* Allows the right column to fill the remaining space */
+.dashboard-main-column {
+    flex: 1 !important;
+    display: flex !important;
+    flex-direction: column !important;
+    gap: 20px !important;
+}
+
+/* For mobile version */
+@media (max-width: 768px) {
+    .dashboard-grid-container {
+        flex-direction: column !important;
+    }
+    .level-sidebar {
+        width: 100% !important;
+        flex: none !important;
+    }
+}

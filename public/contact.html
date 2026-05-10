@@ -1,0 +1,95 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>Contact Us</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1"> 
+    <link href="css/style.css" rel="stylesheet"> 
+</head> 
+<body> 
+  <header>
+    <a href="index.html" class="logo" style="text-decoration: none; font-weight: 800; font-family: sans-serif; letter-spacing: -2px; display: flex; align-items: center; font-size: 1.7rem;">
+    <span style="color: #01725a;">S</span><span style="color: #333;">TEP</span>
+</a>
+    <nav>
+  <div class="dropdown">
+    <div class="dropbtn bar">
+      <span></span>
+      <span></span>
+      <span></span>
+    </div>
+    
+    <div class="dropdown-content">
+      <div class="dropdown-arrow"></div>
+      <a href="login.html">Login</a>
+      <a href="about.html">About Us</a>
+      <a href="contact.html">Contact Us</a>
+    </div>
+  </div>
+</nav>
+  </header>
+
+  <main class="legal-container">
+    <section class="legal-header">
+        <h1 style="color:#016b54";>Contact Support</h1>
+        <p>Use the form below to report issues or ask questions.</p>
+    </section>
+
+    <div class="auth-box" style="margin: 0 auto; max-width: 600px; text-align: left;">
+    <div id="divForm">
+        <form id="contactForm">
+            <label for="email">Your Brighton Email:</label>
+            <input type="email" id="email" name="email" placeholder="e.g. h.smith1@uni.brighton.ac.uk" required>
+            
+            <label for="category">Reason for Contact:</label>
+            <select id="category" name="category" required style="width: 100%; padding: 12px; margin-bottom: 20px; border: 1px solid #ccc; font-family: inherit;">
+                <option value="" disabled selected>Select a category</option>
+                <option value="technical">Technical Issue / Bug</option>
+                <option value="guidelines">Report a Guideline Violation</option>
+                <option value="account">Account & Login Support</option>
+                <option value="academic">Academic Integrity Concern</option>
+                <option value="other">Other Inquiry</option>
+            </select>
+
+            <label for="subject">Short Summary:</label>
+            <input type="text" id="subject" name="subject" placeholder="e.g. Trouble resetting password" required>
+
+            <label for="message">Detailed Description:</label>
+            <textarea id="message" name="message" rows="6" placeholder="Please provide as much detail as possible..." style="width: 100%; padding: 12px; border: 1px solid #ccc; margin-bottom: 20px; font-family: inherit;" required></textarea>
+
+            <button type="submit" class="cta-btn" style="width: 100%;">Send Message</button>
+        </form>
+    </div>
+
+    <div id="divLoading" style="display:none; text-align:center; padding: 40px;">
+        <img src="loading.gif" alt="Sending..." style="width: 100px;">
+        <p>Sending your message...</p>
+    </div>
+
+    <div id="divSuccess" style="display:none; text-align:center; padding: 40px; background: #f0f0f0; border: 1px solid #333; margin-top: 20px;">
+        <h2>Thank you!</h2>
+        <p>Our support team will review your message and get back to your Brighton email as soon as possible.</p>
+        <a href="index.html" class="cta-btn" style="display: block; text-decoration: none; width: 100%; text-align: center; margin-top: 20px; box-sizing: border-box;;">Return Home</a>
+
+        
+    </div>
+</div>
+  </main>
+
+  <footer>
+    <div>
+    <a href="contact.html">Contact Us</a>
+    <a href="guidelines.html">Guidelines</a>
+    <a href="privacy.html">Privacy Policy</a>
+    <a href="terms.html">Terms of Service</a>
+    <a href="https://unibrightonac.sharepoint.com/" target="_blank" style="font-size: 0.75rem; opacity: 0.8; margin-top: 5px;">MyBrighton</a>
+  </div>
+
+  <div style="margin-top: 20px; font-size: 0.8rem; color: #01725a; width: 100%; padding-top: 2px;">
+    © 2026, STEP — University of Brighton.
+  </div>
+  </footer>
+
+  <script src="javascript/contact.js"></script>
+</body>
+</html>
