@@ -408,9 +408,14 @@ app.post("/users", async (req, res) => { //sets up POST request, asyncronous as 
       from: "STEP <onboarding@resend.dev>",
       to: [email],
       subject: "verfication of sign in",
-      html:
-        <><h1>Welcome to STEP</h1><p><a href="${verf_link}">verify my email</a>h</p></>,
-    })
+      html:` 
+        <h2>Welcome to BSS, ${first_name}!</h2>
+        <p>Please verify your email address by clicking the link below:</p>
+        <p><a href="${verificationLink}">Verify my email</a></p>
+        <p>This link expires in 24 hours.</p>
+        `,
+    });
+    
     res.json(result.rows[0]); //sends response of new data in JSON
   } catch (err) {
     console.error("code:", err.code);
