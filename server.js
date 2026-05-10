@@ -272,7 +272,7 @@ app.get("/verify_email", async (req, res) => {
 
     const user = result.rows[0];
 
-    if (new Date(user.verf_token_expires) < new Date()) {
+    if (new Date(user.verif_token_expires) < new Date()) {
       return res.status(400).send("Verification link expired");
     }
 
