@@ -124,4 +124,30 @@ document.addEventListener("DOMContentLoaded", () => { //same as other  JS files 
   });
 
   loadDashboard(); // calling function
+
+
+
+  
+
+  // allows a user to be able to logout from dashboard
+  const logoutBtn = document.querySelector("#logoutBtn");
+  if (logoutBtn) {
+    logoutBtn.addEventListener("click", async () => {
+      try {
+        const response = await fetch("/logout", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" }
+        });
+        if (response.ok) {
+          // if successful, redirects the user to the main page
+          window.location.href = "index.html";
+        } else {
+          alert("Logout failed. Please try again.");
+        }
+      } catch (error) {
+        console.error("Logout error:", error);
+      }
+    });
+  }
 });
+

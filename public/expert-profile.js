@@ -30,6 +30,14 @@ document.addEventListener("DOMContentLoaded", async () => {
 
     const expert = result.user;
 
+    // fills a users initials be put in expert-profile 
+    const initialsSpan = document.querySelector("#initials");
+    if (initialsSpan && expert.first_name && expert.last_name) {
+      const firstInitial = expert.first_name.charAt(0).toUpperCase();
+      const lastInitial = expert.last_name.charAt(0).toUpperCase();
+      initialsSpan.textContent = firstInitial + lastInitial;
+    }
+
     // fills the page with the info from the database
     nameHeader.textContent = `${expert.first_name} ${expert.last_name}`;
     tagline.textContent = `${expert.subject} Expert`;
@@ -37,6 +45,8 @@ document.addEventListener("DOMContentLoaded", async () => {
     degreeSpan.textContent = expert.degree_type;
     yearSpan.textContent = expert.year_of_study_currunt;
     descPara.textContent = expert.description || "This expert hasn't written a bio yet.";
+
+    
 
     // addiitonal details about the expert
     document.querySelector("#displayEmail").textContent = expert.email;
@@ -88,6 +98,34 @@ document.addEventListener("DOMContentLoaded", async () => {
         alert("Something went wrong. Please try again.");
       }
     });
+
+
+
+
+
+    // allows a user to be able to logout from expert-profile
+    const logoutBtn = document.querySelector("#logoutBtn");
+    if (logoutBtn) {
+      logoutBtn.addEventListener("click", async () => {
+        try {
+          // sends a POST request to the server logout 
+          const response = await fetch("/logout", {
+            method: "POST",
+            headers: { "Content-Type": "application/json" }
+          });
+
+          if (response.ok) {
+            // if successful, redirects the user to the main page
+            window.location.href = "index.html";
+          } else {
+            alert("Logout failed. Please try again.");
+          }
+        } catch (error) {
+          console.error("Logout error:", error);
+          alert("An error occurred during logout.");
+        }
+      });
+    }
   }
 });
 
