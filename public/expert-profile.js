@@ -30,13 +30,13 @@ document.addEventListener("DOMContentLoaded", async () => {
 
     const expert = result.user;
 
-    // fills a users initials be put in expert-profile 
+    /* fills a users initials be put in expert-profile 
     const initialsSpan = document.querySelector("#initials");
     if (initialsSpan && expert.first_name && expert.last_name) {
       const firstInitial = expert.first_name.charAt(0).toUpperCase();
       const lastInitial = expert.last_name.charAt(0).toUpperCase();
       initialsSpan.textContent = firstInitial + lastInitial;
-    }
+    }*/
 
     // fills the page with the info from the database
     nameHeader.textContent = `${expert.first_name} ${expert.last_name}`;
