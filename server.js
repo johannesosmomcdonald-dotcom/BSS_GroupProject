@@ -537,7 +537,7 @@ app.post("/reset-password", async (req, res) => {
   try {
     const email = String(req.body.email || "").trim().toLowerCase();
     const code = String(req.body.code || "").trim();
-    const newPassword = String(req.body.password || req.body.newPassword || "");
+    const newPassword = String(req.newPass || "");
 
     if (!email || !code || !newPassword) { // makes sure email and new password and code are required
       return res.status(400).json({ error: "Email, code and new password are required" });
