@@ -477,6 +477,120 @@ app.post("/api/messages", requireLogin, async (req, res) => {
     res.status(500).json({ error: "Server error" });
   }
 });
+// this POST request sets up the verification for resetting the password
+app.post("/request-reset", async (req, res) => {
+  try {
+    const email = String(req.body.email || "").trim().toLowerCase(); // gets email
+
+    if (!email) {
+      return res.status(400).json({ error: "Email is required" });
+    }
+
+    const userResult = await pool.query( // selects user info 
+      "SELECT id, first_name, email FROM users WHERE email = $1",
+      [email]
+    );
+
+    // Do not reveal if email exists
+    if (userResult.rows.length === 0) {
+      return res.json({ message: "If this email exists, a reset code has been sent" });
+    }
+
+    const user = userResult.rows[0];
+
+    // 6 digit reset code for verification
+    const resetCode = crypto.randomInt(100000, 999999).toString();
+    const resetCodeHash = await bcrypt.hash(resetCode, 12);
+    const resetCodeExpires = new Date(Date.now() + 1000 * 60 * 15); // 15 mins
+
+    await pool.query( // query to update password
+      `UPDATE users
+       SET reset_code_hash = $1,
+           reset_code_expires = $2
+       WHERE id = $3`,
+      [resetCodeHash, resetCodeExpires, user.id]
+    );
+
+    await transporter.sendMail({ 
+      from: `"STEP" <${process.env.EMAIL_USER}>`,
+      to: user.email,
+      subject: "Password reset code",
+      html: `
+        <h2>Password Reset</h2>
+        <p>Hello ${user.first_name || "there"},</p>
+        <p>Your password reset code is:</p>
+        <h1>${resetCode}</h1>
+        <p>This code expires in 15 minutes.</p>
+      `,
+    });
+
+    res.json({ message: "If this email exists, a reset code has been sent" });
+  } catch (error) {
+    console.error("Request reset error:", error);
+    res.status(500).json({ error: "Server error" }); // error catch
+  }
+});
+
+
+
+app.post("/reset-password", async (req, res) => {
+  try {
+    const email = String(req.body.email || "").trim().toLowerCase();
+    const code = String(req.body.code || "").trim();
+    const newPassword = String(req.body.password || req.body.newPassword || "");
+
+    if (!email || !code || !newPassword) { // makes sure email and new password and code are required
+      return res.status(400).json({ error: "Email, code and new password are required" });
+    }
+
+    if (newPassword.length < 8) { // password check same as beforee min 8 
+      return res.status(400).json({ error: "Password must be at least 8 characters" });
+    }
+
+    const result = await pool.query( // pool query
+      `SELECT id, reset_code_hash, reset_code_expires
+       FROM users
+       WHERE email = $1`,
+      [email]
+    );
+
+    if (result.rows.length === 0) { // incase invalid code or too long time
+      return res.status(400).json({ error: "Invalid or expired reset code" });
+    }
+
+    const user = result.rows[0];
+
+    if (!user.reset_code_hash || !user.reset_code_expires) { // incase invalid code or too long time
+      return res.status(400).json({ error: "Invalid or expired reset code" });
+    }
+
+    if (new Date(user.reset_code_expires) < new Date()) { // verification if code has been active too long
+      return res.status(400).json({ error: "Reset code has expired" });
+    }
+
+    const codeMatches = await bcrypt.compare(code, user.reset_code_hash); // checking code mathces hashed encrypt
+
+    if (!codeMatches) { // error sent if codes dont match
+      return res.status(400).json({ error: "Invalid or expired reset code" });
+    }
+
+    const passwordHash = await bcrypt.hash(newPassword, 12); // hashes new password like when creating a account
+
+    await pool.query( // pool query
+      `UPDATE users
+       SET password_hash = $1,
+           reset_code_hash = NULL,
+           reset_code_expires = NULL
+       WHERE id = $2`,
+      [passwordHash, user.id]
+    );
+
+    res.json({ message: "Password reset successful" }); // sent if succsesful
+  } catch (error) {
+    console.error("Reset password error:", error);
+    res.status(500).json({ error: "Server error" }); // error sent to JSON and user if an error with the server itself pops up
+  }
+});
 
 // Login route
 app.post("/login", async (req, res) => {
