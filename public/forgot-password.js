@@ -98,15 +98,3 @@ document.addEventListener("DOMContentLoaded", () => {
   });
 });
 
-// Tom or Johan - DELETE THIS AFTER YOU HAVE IMPLEMENTED THIS.
-
-/*
-I've created the html and this js code for the forgot password. 
-however you need to: create POST for:
-
-app.post("/request-reset"): This should take the student to their email, generate a random code (maybe using the crypto logic we used for signup), and use our transporter to email it to the user.
-
-And POST: app.post("/reset-password"): This needs to check if the code matches what's in the database and then update the user's password using bcrypt.
-
-I've used fetch in my js to point to these exact urls, so once their both live, the whole thing should connect automatically. hopefully.  
-*/

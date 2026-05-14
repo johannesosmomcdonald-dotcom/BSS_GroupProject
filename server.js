@@ -258,38 +258,53 @@ app.get("/api/users/:id", requireLogin, async (req, res) => {
 //////////////////////////////////////////////////////////////////////
 /////////////////////////////////////////////////////////////////////
 
-app.get("/verify_email", async (req, res) => {
+app.get("/verify_email", async (req, res) => { // code for verifying emails
   try {
-    const token = String(req.query.token).trim();
+    const token = String(req.query.token).trim(); // sets token const
 
     if (!token) {
-      return res.status(400).json({ error: "no token " });
+      return res.status(400).json({ error: "no token " }); // checks if theres a token
     }
 
-    const result = await pool.query(
+    const result = await pool.query( // sql query for where the token is
       `SELECT id, verif_token_expires FROM users
        WHERE verif_token = $1`, [token]
     );
 
-    if (result.rows.length === 0) {
+    /*if (result.rows.length === 0) { 
       return res.status(400).send("Invalid verification link");
+    }*/
+    // above was commented out die to it causing the system to state verification was invalid when it had succeded
+    //below was used to replace it where it returns a inserted html body page telling the user it has been verified or expired 
+    // and provides a link to the log in
+
+    if (result.rows.length === 0) {
+      return res.send(`
+    <html>
+      <body style="font-family: Arial; text-align:center; padding-top:50px;">
+        <h1>Email already verified</h1>
+        <p>Your account is already verified or the link has expired.</p>
+        <a href="/login.html">Go to Login</a>
+      </body>
+    </html>
+  `);
     }
 
     const user = result.rows[0];
 
-    if (new Date(user.verif_token_expires) < new Date()) {
+    if (new Date(user.verif_token_expires) < new Date()) { // if val link time experation past
       return res.status(400).send("Verification link expired");
     }
 
-    await pool.query(
+    await pool.query( // updates user database
       `UPDATE users
        SET email_verif = true, verif_token = NULL, verif_token_expires = NULL
        WHERE id = $1`, [user.id]
     );
 
-    res.send("Email verified successfully");
+    res.send("Email verified successfully");// succesful verification
 
-  } catch (error) {
+  } catch (error) { // server error catching
     console.error("Verification error:", error);
     res.status(500).send("Server error");
   }
@@ -325,7 +340,7 @@ app.put("/api/me", requireLogin, async (req, res) => { // defines a PUT request 
 
     //SQL query to update the DATABASE
 
-    const result = await pool.query(
+    const result = await pool.query( 
       `UPDATE users
        SET first_name = $1,
            last_name = $2,
@@ -378,7 +393,7 @@ app.put("/api/me", requireLogin, async (req, res) => { // defines a PUT request 
 //post for adding new users to the database
 app.post("/users", async (req, res) => { //sets up POST request, asyncronous as can happen any time allows wait apllies to all other asyncs aswell
   try {
-    const first_name = String(req.body.first_name || "").trim();
+    const first_name = String(req.body.first_name || "").trim(); // trimming to get consistent results
     const last_name = String(req.body.last_name || "").trim();
     const date_of_birth = req.body.date_of_birth;
     const gender = String(req.body.gender || "").trim();
@@ -509,7 +524,7 @@ app.post("/api/messages", requireLogin, async (req, res) => { // api for message
       [req.session.userId, recipientId, message]
     );
 
-    await transporter.sendMail({ // email details sent to expert
+    await transporter.sendMail({ // email details sent to expert 
       from: `"STEP" <${process.env.EMAIL_USER}>`,
       to: expert.email,
       replyTo: sender.email,
@@ -522,7 +537,7 @@ You have received a new message on STEP.
 From: ${sender.first_name} ${sender.last_name}
 Email: ${sender.email}
 
-Message:
+Message: 
 ${message}
       `.trim(),
       html: `
@@ -534,7 +549,7 @@ ${message}
         <p><strong>Message:</strong></p>
         <p>${message.replace(/\n/g, "<br>")}</p>
       `,
-    });
+    }); //message that appears in email sent
 
     res.json({ message: "Message sent!" });
   } catch (error) {
@@ -620,7 +635,7 @@ app.post("/request-reset", async (req, res) => {
       [resetCodeHash, resetCodeExpires, user.id]
     );
 
-    await transporter.sendMail({
+    await transporter.sendMail({ // the code for setting up the reset code for resetting password to the email for the user for verification
       from: `"STEP" <${process.env.EMAIL_USER}>`,
       to: user.email,
       subject: "Password reset code",
@@ -642,7 +657,7 @@ app.post("/request-reset", async (req, res) => {
 
 
 
-app.post("/reset-password", async (req, res) => {
+app.post("/reset-password", async (req, res) => { // post for resetting password as well as the one above
   try {
     console.log("reset password working");
     const email = String(req.body.email || "").trim().toLowerCase();
@@ -766,13 +781,8 @@ app.post("/logout", (req, res) => { // path POST for logout
 });
 
 
-
-
-
-
-
 ///////////////////////////////// ALL Listens are below this comment
-//loads local server 
+//loads local server for local testing 
 app.listen(port, () => {
   console.log(`Server running on http://localhost:${port}`);
 });

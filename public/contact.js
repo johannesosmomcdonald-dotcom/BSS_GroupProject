@@ -25,7 +25,7 @@ document.addEventListener("DOMContentLoaded", () => {
                     "Content-Type": "application/json",
                 },
                 body: JSON.stringify({
-                    email: formData.get("email"),
+                    email: formData.get("email"), // updated gets so matches rest of code
                     reason: formData.get("category"),
                     summary: formData.get("subject"),
                     description: formData.get("message"),
@@ -42,7 +42,7 @@ document.addEventListener("DOMContentLoaded", () => {
             if (divLoading) divLoading.style.display = "none";
             if (divSuccess) divSuccess.style.display = "block";
 
-            contactForm.reset();
+            contactForm.reset(); // resetting form incase user wants to send other contact relating to another topic
         } catch (error) {
             console.error("Submission error:", error);
             // If it fails, bring the form back
