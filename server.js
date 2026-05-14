@@ -449,7 +449,10 @@ app.post("/users", async (req, res) => { //sets up POST request, asyncronous as 
         <p>This link expires in 24 hours.</p>`,
     });
 
-    res.json(result.rows[0]); //sends response of new data in JSON
+    //res.json(result.rows[0]); //sends response of new data in JSON
+    res.status(201).json({
+      message: "Account created. Please check your email to verify your account before logging in."
+    });
   } catch (err) {
     console.error("code:", err.code);
     console.error("constraint:", err.constraint);

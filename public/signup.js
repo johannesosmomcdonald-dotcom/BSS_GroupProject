@@ -95,7 +95,7 @@ document.addEventListener("DOMContentLoaded", () => { // sets up a event listene
 
             // a time delay for loading gif
             setTimeout(() => {
-                window.location.href = "/login.html"; // takes to user back to login page
+                window.location.href = "/verify-notice.html"; // takes to user to verification page
             }, 1600);
 
             console.log(result); //logs to console UI
