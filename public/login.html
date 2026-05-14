@@ -1,0 +1,92 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <title>Login</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link href="style.css" rel="stylesheet">
+</head>
+
+<body>
+  <header>
+    <a href="index.html" class="logo"
+      style="text-decoration: none; font-weight: 800; font-family: sans-serif; letter-spacing: -2px; display: flex; align-items: center; font-size: 1.7rem;">
+      <span style="color: #01725a;">S</span><span style="color: #333;">TEP</span>
+    </a>
+    <nav>
+      <div class="dropdown">
+        <div class="dropbtn bar">
+          <span></span>
+          <span></span>
+          <span></span>
+        </div>
+
+        <div class="dropdown-content">
+          <div class="dropdown-arrow"></div>
+          <a href="login.html">Login</a>
+          <a href="about.html">About Us</a>
+          <a href="contact.html">Contact Us</a>
+        </div>
+      </div>
+    </nav>
+  </header>
+
+  <main class="auth-container">
+    <div class="auth-box">
+      <h1 style="color:#02523f">Log into your account</h1>
+      <p>Welcome back! Please enter your Brighton credentials.</p>
+
+      <form id="login_Inputs">
+        <label for="email">Email Address:</label>
+        <input id="email" type="email" placeholder="e.g. h.smith1@uni.brighton.ac.uk" required>
+
+        <label for="password">Password:</label>
+        <input id="password" type="password" required>
+
+        <p class="auth-switch" style="text-align: right; margin-top: -10px; margin-bottom: 2px;">
+          <a href="forgot-password.html" style="font-size: 0.85rem;">Forgot password?</a>
+        </p>
+
+        <p id="message" style="color: red; font-size: 0.9rem; margin-top: 10px;"></p>
+
+        <div id="divForm">
+          <button type="submit" class="cta-btn">Login</button>
+        </div>
+
+        <div id="divLoading" style="display:none; text-align:center; padding: 20px;">
+          <img src="loading.gif" alt="Logging in..." style="width: 100px;">
+          <p>Verifying credentials...</p>
+        </div>
+
+        <div id="divSuccess" style="display:none; text-align:center; padding: 20px;">
+          <h2 style="color: green;">Success!</h2>
+          <p>Redirecting to dashboard...</p>
+        </div>
+      </form>
+
+      <button id="backBtn" class="cta-btn" style="background: #666; margin-top: 10px; width: 100%;">Back</button>
+
+      <p class="auth-switch">Don't have an account? <a href="signup.html">Sign up here</a></p>
+    </div>
+  </main>
+
+  <footer>
+    <div>
+      <a href="contact.html">Contact Us</a>
+      <a href="guidelines.html">Guidelines</a>
+      <a href="privacy.html">Privacy Policy</a>
+      <a href="terms.html">Terms of Service</a>
+      <a href="https://unibrightonac.sharepoint.com/" target="_blank"
+        style="font-size: 0.75rem; opacity: 0.8; margin-top: 5px;">MyBrighton</a>
+    </div>
+
+    <div style="margin-top: 20px; font-size: 0.8rem; color: #01725a; width: 100%; padding-top: 2px;">
+      © 2026, STEP — University of Brighton.
+    </div>
+  </footer>
+
+  <script src="login.js"></script>
+</body>
+
+</html>

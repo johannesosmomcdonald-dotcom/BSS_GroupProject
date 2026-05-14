@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Dashboard</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+
+<body>
+  <header>
+    <a href="index.html" class="logo"
+      style="text-decoration: none; font-weight: 800; font-family: sans-serif; letter-spacing: -2px; display: flex; align-items: center; font-size: 1.7rem;">
+      <span style="color: #01725a;">S</span><span style="color: #333;">TEP</span>
+    </a>
+    <nav>
+      <div class="dropdown">
+        <div class="dropbtn bar">
+          <span></span>
+          <span></span>
+          <span></span>
+        </div>
+
+        <div class="dropdown-content">
+          <div class="dropdown-arrow"></div>
+          <a href="profile.html">My Profile</a>
+          <a href="about.html">About Us</a>
+          <a href="contact.html">Contact Us</a>
+          <button id="logoutBtn" class="cta-btn">Log out</button>
+        </div>
+      </div>
+    </nav>
+  </header>
+
+
+  <main class="dashboard-page-content">
+    <section class="legal-header" style="margin-bottom: 25px;">
+      <h1 style="color:#015e49" ;>My Dashboard</h1>
+    </section>
+
+    <div class="dashboard-grid-container">
+
+      <section class="team-card level-sidebar">
+        <div
+          style="color:#015e49; display: flex; justify-content: space-between; align-items: center; margin-bottom: 10px;">
+          <h2 style="margin: 0; font-size: 1.2rem;">STEP Rewards</h2>
+          <span style="font-weight: bold; color: #666;">Lvl 1</span>
+        </div>
+        <div style="background: #eee; border-radius: 10px; height: 12px; width: 100%; margin-bottom: 10px;">
+          <div style="background: #333; width: 10%; height: 100%; border-radius: 10px;"></div>
+        </div>
+        <div style="display: flex; justify-content: space-between; font-size: 0.85rem; font-weight: bold;">
+          <span>10 XP</span>
+          <span style="color: #888;">100 XP to Lvl 2</span>
+        </div>
+        <p style="font-size: 0.8rem; color: #0e0d0d; margin-top: 15px; border-top: 1px solid #eee; padding-top: 10px;">
+          <strong>Congratulations:</strong> You created an account!! 10XP
+        </p>
+        <p style="font-size: 0.8rem; color: #666; margin-top: 15px; border-top: 1px solid #eee; padding-top: 10px;">
+          <strong>Next:</strong> Contact an expert to earn 20 XP!
+        </p>
+      </section>
+
+      <div class="dashboard-main-column">
+        <section class="team-card" style="padding: 15px;">
+          <h2 style="color :#015e49; margin-top: 0;">Find Your 'Experts'</h2>
+          <form id="userSearchForm" style="text-align: left;">
+            <label for="degreeSearch">Search by degree or subject:</label>
+            <div style="display: flex; gap: 10px; margin-top: 10px;">
+              <input type="text" id="degreeSearch" placeholder="e.g. Computer Science, BSc, Business" required
+                style="flex: 1; padding: 12px; border: 1px solid #ccc; border-radius: 4px;" />
+              <button type="submit" class="cta-btn" style="margin-top: 0;">Search</button>
+            </div>
+          </form>
+          <p id="searchMessage" style="margin-top: 10px; font-weight: bold;"></p>
+          <div id="searchResults" class="subject-grid"></div>
+        </section>
+
+        <section class="team-card" style="padding: 15px;">
+          <h2 style="color:#015e49; margin-top: 0;">My Details</h2>
+          <ul id="profileList" style="list-style: none; padding: 0; text-align: left; line-height: 1.6;"></ul>
+          <a href="profile.html" style="text-decoration: none;">
+            <button id="editDetailsBtn" type="button" class="cta-btn" style="width: 100%; margin-top: 10px;">
+              View / Update My Details
+            </button>
+          </a>
+        </section>
+      </div>
+    </div>
+  </main>
+
+  <footer>
+    <div>
+      <a href="contact.html">Contact Us</a>
+      <a href="guidelines.html">Guidelines</a>
+      <a href="privacy.html">Privacy Policy</a>
+      <a href="terms.html">Terms of Service</a>
+      <a href="https://unibrightonac.sharepoint.com/" target="_blank"
+        style="font-size: 0.75rem; opacity: 0.8; margin-top: 5px;">MyBrighton</a>
+    </div>
+
+    <div style="margin-top: 20px; font-size: 0.8rem; color: #01725a; width: 100%; padding-top: 2px;">
+      © 2026, STEP — University of Brighton.
+    </div>
+  </footer>
+
+  <script src="dashboard.js"></script>
+</body>
+
+</html>

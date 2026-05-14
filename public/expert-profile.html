@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Expert Profile</title>
+    <link rel="stylesheet" href="style.css" />
+</head>
+
+<body>
+    <header>
+        <a href="index.html" class="logo"
+            style="text-decoration: none; font-weight: 800; font-family: sans-serif; letter-spacing: -2px; display: flex; align-items: center; font-size: 1.7rem;">
+            <span style="color: #01725a;">S</span><span style="color: #333;">TEP</span>
+        </a>
+        <nav>
+            <div class="dropdown">
+                <div class="dropbtn bar">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </div>
+
+                <div class="dropdown-content">
+                    <div class="dropdown-arrow"></div>
+                    <a href="profile.html">My Profile</a>
+                    <a href="about.html">About Us</a>
+                    <a href="contact.html">Contact Us</a>
+                    <button id="logoutBtn" class="cta-btn">Log out</button>
+                </div>
+            </div>
+        </nav>
+    </header>
+
+    <main class="dashboard-page-content" style="max-width: 1000px; margin: 0 auto; padding: 40px 20px;">
+
+        <div style="margin-bottom: 20px;">
+        <a href="dashboard.html" style="text-decoration: none; color: #666; font-weight: 600; display: inline-flex; align-items: center; gap: 8px;">
+            <span style="color: #01725a; font-size: 1.2rem;">←</span> Back to My Dashboard
+        </a>
+    </div>
+
+        <section style="text-align: center; margin-bottom: 40px;">
+            <div
+                style="width: 100px; height: 100px; background: #333; color: white; border-radius: 50%; display: flex; align-items: center; justify-content: center; margin: 0 auto 15px; font-size: 2rem; font-weight: bold; border: 4px solid #fff; box-shadow: 0 4px 10px rgba(0,0,0,0.1);">
+                <span id="initials">EP</span>
+            </div>
+            <h1 id="expertName" style="margin: 0; font-size: 2.2rem; color: #222;">Expert Profile</h1>
+            <p id="expertTagline" style="color: #666; font-size: 1.1rem; margin-top: 5px; font-weight: 500;">Expert
+                Details</p>
+        </section>
+
+        <div class="dashboard-grid-container" style="display: grid; grid-template-columns: 1fr 2fr; gap: 30px;">
+
+            <section class="team-card level-sidebar"
+                style="height: fit-content; padding: 25px; border-top: 4px solid #333;">
+                <h3 style="color:#02523f; " margin-top: 0; font-size: 1.2rem; border-bottom: 1px solid #eee;
+                    padding-bottom: 10px; margin-bottom: 15px;">
+                    Academic Status</h3>
+                <div style="display: flex; flex-direction: column; gap: 12px; margin-bottom: 20px;">
+                    <p style="margin: 0;"><strong>Subject:</strong> <br><span id="displaySubject"
+                            style="color: #555;">-</span></p>
+                    <p style="margin: 0;"><strong>Degree:</strong> <br><span id="displayDegree"
+                            style="color: #555;">-</span></p>
+                    <p style="margin: 0;"><strong>Year:</strong> <br><span id="displayYear"
+                            style="color: #555;">-</span></p>
+                </div>
+
+                <h3
+                    style="color:#02523f; margin-top: 20px; font-size: 1.2rem; border-bottom: 1px solid #eee; padding-bottom: 10px; margin-bottom: 15px;">
+                    Personal Details</h3>
+                <div style="display: flex; flex-direction: column; gap: 12px; margin-bottom: 20px;">
+                    <p style="margin: 0;"><strong>Gender:</strong> <br><span id="displayGender"
+                            style="color: #555;">-</span></p>
+                    <p style="margin: 0;"><strong>DOB:</strong> <br><span id="displayDOB" style="color: #555;">-</span>
+                    </p>
+                </div>
+
+                <h3
+                    style="color:#02523f; margin-top: 20px; font-size: 1.2rem; border-bottom: 1px solid #eee; padding-bottom: 10px; margin-bottom: 15px;">
+                    Contact Info</h3>
+                <div style="display: flex; flex-direction: column; gap: 12px;">
+                    <p style="margin: 0;"><strong>Email:</strong> <br>
+                        <span id="displayEmail" style="color: #555; overflow-wrap: break-word;">-</span>
+                    </p>
+                    <p style="margin: 0;"><strong>Phone:</strong> <br><span id="displayPhone"
+                            style="color: #555;">-</span></p>
+                </div>
+
+
+                <div style="margin-top: 30px; border-top: 1px solid #eee; padding-top: 20px;">
+                    <p style="font-size: 0.85rem; color: #888; margin-bottom: 10px;">
+                        Something wrong with this profile?
+                    </p>
+                    <a href="contact.html" class="cta-btn"
+                        style="display: block; text-align: center; background: #fff; color: #d9534f; border: 2px solid #d9534f; text-decoration: none; padding: 10px; font-weight: bold; font-size: 0.9rem; border-radius: 6px;">
+                        Report
+                    </a>
+                </div>
+            </section>
+
+            <div class="dashboard-main-column" style="display: flex; flex-direction: column; gap: 25px;">
+                <section class="team-card" style="color:#02523f; padding: 30px; border-radius: 12px;">
+                    <h2 style="margin-top: 0; font-size: 1.5rem;">About the Expert</h2>
+                    <p id="displayDescription"
+                        style="line-height: 1.8; color: #444; background: #fff; padding: 20px; border-radius: 8px; border-left: 4px solid #eee;">
+                        Loading...
+                    </p>
+                </section>
+
+                <section class="team-card"
+                    style="color:#02523f; padding: 30px; border-radius: 12px; border: 1px solid #e0e0e0;">
+                    <h2 style="margin-top: 0; font-size: 1.5rem;">Contact Expert</h2>
+
+                    <div id="divForm">
+                        <p style="font-size: 0.95rem; color: #777; margin-bottom: 20px;">
+                            Need help with your degree? Send a quick message to initiate a consultation.
+                        </p>
+                        <form id="contactForm">
+                            <textarea id="userMessage" placeholder="Type your message here..." required
+                                style="width: 91.5%; padding: 15px; border: 2px solid #f0f0f0; border-radius: 8px; min-height: 150px; font-family: inherit; font-size: 1rem;"></textarea>
+
+                            <button type="submit" class="cta-btn"
+                                style="width: 100%; margin-top: 20px; padding: 15px; font-weight: bold;">
+                                Send Message
+                            </button>
+                        </form>
+                    </div>
+
+                    <div id="divLoading" style="display:none; text-align:center; padding: 40px;">
+                        <img src="loading.gif" alt="Sending..." style="width: 80px;">
+                        <p>Sending your message to the expert...</p>
+                    </div>
+
+                    <div id="divSuccess"
+                        style="display:none; text-align:center; padding: 40px; background: #f9f9f9; border-radius: 8px;">
+                        <h2 style="color: #28a745;">Sent!</h2>
+                        <p>Your message has been delivered. The expert will be notified.</p>
+                        <button onclick="location.reload()" class="cta-btn"
+                            style="background: #333; margin-top: 15px;">Send another message</button>
+                    </div>
+
+                </section>
+            </div>
+        </div>
+    </main>
+
+    <button id="goToTopBtn" title="Go to top">
+        <img src="up.png" alt="Top" style="width: 20px; height: 20px;">
+    </button>
+
+    <footer>
+        <div>
+            <a href="contact.html">Contact Us</a>
+            <a href="guidelines.html">Guidelines</a>
+            <a href="privacy.html">Privacy Policy</a>
+            <a href="terms.html">Terms of Service</a>
+            <a href="https://unibrightonac.sharepoint.com/" target="_blank"
+                style="font-size: 0.75rem; opacity: 0.8; margin-top: 5px;">MyBrighton</a>
+        </div>
+
+        <div style="margin-top: 20px; font-size: 0.8rem; color: #01725a; width: 100%; padding-top: 2px;">
+            © 2026, STEP — University of Brighton.
+        </div>
+    </footer>
+
+    <script src="expert-profile.js"></script>
+    <script src="top.js"></script>
+</body>
+
+</html>

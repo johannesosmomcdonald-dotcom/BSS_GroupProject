@@ -1,0 +1,29 @@
+{
+  "name": "neon-render_connection",
+  "version": "1.0.0",
+  "description": "JSON package for BSS Project",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/johannesosmomcdonald-dotcom/BSS_Official_Group_Project.git"
+  },
+  "author": "Johannes Mcdonald, Thomas, Alex, Hannah",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/johannesosmomcdonald-dotcom/BSS_Official_Group_Project/issues"
+  },
+  "homepage": "https://github.com/johannesosmomcdonald-dotcom/BSS_Official_Group_Project#readme",
+  "dependencies": {
+    "bcrypt": "^6.0.0",
+    "connect-pg-simple": "^10.0.0",
+    "dotenv": "^17.3.1",
+    "express": "^5.2.1",
+    "express-session": "^1.18.1",
+    "nodemailer": "^8.0.7",
+    "pg": "^8.20.0",
+    "resend": "^6.12.3"
+  }
+}

@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>My Profile</title>
+    <link rel="stylesheet" href="style.css" />
+</head>
+
+<body>
+    <header>
+        <a href="index.html" class="logo" style="text-decoration: none; font-weight: 800; font-family: sans-serif; letter-spacing: -2px; display: flex; align-items: center; font-size: 1.7rem;">
+    <span style="color: #01725a;">S</span><span style="color: #333;">TEP</span>
+</a>
+        <nav>
+            <div class="dropdown">
+                <div class="dropbtn bar">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </div>
+
+                <div class="dropdown-content">
+                    <div class="dropdown-arrow"></div>
+                    <a href="profile.html">My Profile</a>
+                    <a href="about.html">About Us</a>
+                    <a href="contact.html">Contact Us</a>
+                    <button id="logoutBtn" class="cta-btn">Log out</button>
+                </div>
+            </div>
+        </nav>
+    </header>
+
+
+    <main class="legal-container">
+        <section class="legal-header">
+            <h1 style="color:#02523f">Account Settings</h1>
+            <p>Update your details to improve your matches within the student network.</p>
+        </section>
+
+        <section class="auth-box" style="max-width: 600px; margin: 0 auto; text-align: left;">
+            <p id="statusMessage"></p>
+
+            <div style="margin-bottom: 20px;">
+                <button id="backBtn" type="button" onclick="window.location.href='dashboard.html'" class="cta-btn"
+                    style="background: #666;">Back to Dashboard</button>
+            </div>
+
+            <form id="profileForm"> <label for="first_name">First Name:</label>
+                <input type="text" id="first_name" name="first_name" required />
+
+                <label for="last_name">Last Name:</label>
+                <input type="text" id="last_name" name="last_name" required />
+
+                <label for="date_of_birth">Date of Birth:</label>
+                <input type="date" id="date_of_birth" name="date_of_birth" />
+
+                <label for="gender">Gender:</label>
+                <select id="gender" name="gender" style="width: 100%; padding: 12px; margin-bottom: 20px;">
+                    <option value="">Select gender</option>
+                    <option value="Male">Male</option>
+                    <option value="Female">Female</option>
+                    <option value="Other">Other</option>
+                </select>
+
+                <label for="subject">Subject:</label>
+                <select id="subject" name="subject" style="width: 100%; padding: 12px; margin-bottom: 20px;">
+                    <option value="">Select subject</option>
+                    <option value="Maths">Maths</option>
+                    <option value="English">English</option>
+                    <option value="Computer Science">Computer Science</option>
+                    <option value="German">German</option>
+                </select>
+
+                <label for="degree_type">Degree Type:</label>
+                <select id="degree_type" name="degree_type" style="width: 100%; padding: 12px; margin-bottom: 20px;">
+                    <option value="">Select degree type</option>
+                    <option value="BSc">BSc</option>
+                    <option value="BA">BA</option>
+                    <option value="MSc">MSc</option>
+                    <option value="MA">MA</option>
+                </select>
+
+                <label for="year_of_study_currunt">Year of Study:</label>
+                <select id="year_of_study_currunt" name="year_of_study_currunt"
+                    style="width: 100%; padding: 12px; margin-bottom: 20px;">
+                    <option value="">Select year</option>
+                    <option value="1">Year 1</option>
+                    <option value="2">Year 2</option>
+                    <option value="3">Year 3</option>
+                    <option value="4">Year 4</option>
+                    <option value="5">Year 5</option>
+                </select>
+
+                <label for="email">Email Address:</label>
+                <input type="email" id="email" name="email" required />
+
+                <label for="phone_num">Phone Number:</label>
+                <input type="text" id="phone_num" name="phone_num" />
+
+                <form id="profileForm">
+                    <label for="description">Expert Bio / Description:</label>
+                    <textarea id="description" name="description" rows="5"
+                        style="width: 100%; border: 1px solid #ccc; padding: 10px; font-family: inherit; margin-bottom: 20px;"></textarea>
+
+                    <div id="divForm">
+                        <button type="submit" class="cta-btn" style="width: 100%;">Save Changes</button>
+                    </div>
+
+                    <div id="divLoading" style="display:none; text-align:center; padding: 40px;">
+                        <img src="loading.gif" alt="Saving..." style="width: 100px;">
+                        <p>Updating your profile...</p>
+                    </div>
+
+                    <div id="divSuccess" style="display:none; text-align:center; padding: 40px;">
+                        <h2 style="color: green;">Changes Saved!</h2>
+                        <p>Your profile has been successfully updated.</p>
+                        <button type="button" onclick="location.reload()" class="cta-btn">Back to Profile</button>
+                    </div>
+                </form>
+        </section>
+    </main>
+
+    <footer>
+        <div>
+        <a href="contact.html">Contact Us</a>
+        <a href="guidelines.html">Guidelines</a>
+        <a href="privacy.html">Privacy Policy</a>
+        <a href="terms.html">Terms of Service</a>
+        <a href="https://unibrightonac.sharepoint.com/" target="_blank"
+            style="font-size: 0.75rem; opacity: 0.8; margin-top: 5px;">MyBrighton</a>
+        </div>
+
+        <div style="margin-top: 20px; font-size: 0.8rem; color: #01725a; width: 100%; padding-top: 2px;">
+            © 2026, STEP — University of Brighton.
+        </div>
+    </footer>
+
+    <script src="profile.js"></script>
+</body>
+
+</html>
