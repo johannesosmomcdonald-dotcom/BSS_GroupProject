@@ -26,9 +26,9 @@ document.addEventListener("DOMContentLoaded", () => {
                 },
                 body: JSON.stringify({
                     email: formData.get("email"),
-                    reason: formData.get("reason"),
-                    summary: formData.get("summary"),
-                    description: formData.get("description"),
+                    reason: formData.get("category"),
+                    summary: formData.get("subject"),
+                    description: formData.get("message"),
                 }),
             });
 
