@@ -1,17 +1,78 @@
-<!DOCTYPE html>
-<html lang = "en">
+<!doctype html>
+<html lang="en">
+
 <head>
   <meta charset="utf-8">
   <title>Verify your email</title>
-   <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
   <link rel="stylesheet" href="style.css">
 </head>
+
 <body>
-  <main>
-    <h1>Check your email</h1>
-    <p>Your account has been created.</p>
-    <p>Please check your email and click the verification link before logging in.</p>
-    <a href="/login.html">Go to login</a>
+  <header>
+    <a href="index.html" class="logo"
+      style="text-decoration: none; font-weight: 800; font-family: sans-serif; letter-spacing: -2px; display: flex; align-items: center; font-size: 1.7rem;">
+      <span style="color: #01725a;">S</span><span style="color: #333;">TEP</span>
+    </a>
+    <nav>
+      <div class="dropdown">
+        <div class="dropbtn bar">
+          <span></span>
+          <span></span>
+          <span></span>
+        </div>
+
+        <div class="dropdown-content">
+          <div class="dropdown-arrow"></div>
+          <a href="login.html">Login</a>
+          <a href="about.html">About Us</a>
+          <a href="contact.html">Contact Us</a>
+        </div>
+      </div>
+    </nav>
+  </header>
+
+  <main class="auth-container">
+    <div class="auth-box">
+
+      <div
+        style="width: 60px; height: 60px; background: #01725a; color: white; border-radius: 50%; display: flex; align-items: center; justify-content: center; margin: 0 auto 15px auto; font-size: 1.8rem; font-weight: bold; font-family: sans-serif; box-shadow: 0 4px 8px rgba(1, 114, 90, 0.2);">
+        ✓
+      </div>
+
+      <h2
+        style="color: #01725a; font-family: sans-serif; font-size: 1.8rem; margin-bottom: 12px; font-weight: 700; letter-spacing: -0.5px;">
+        Check your email</h2>
+
+      <p style="color: #333; font-family: sans-serif; font-size: 1rem; font-weight: 600; margin-bottom: 8px;">Your
+        account has been created.</p>
+
+      <p style="color: #555; font-family: sans-serif; font-size: 0.95rem; line-height: 1.5; margin-bottom: 25px;">
+        Please check your email and click the verification link before logging in.
+      </p>
+
+      <a href="login.html" class="cta-btn"
+        style="display: block; text-decoration: none; width: 100%; padding: 16px 20px; font-size: 1.2rem; text-align: center; box-sizing: border-box; font-weight: 700; letter-spacing: 0.5px;">
+        Go to login
+      </a>
+    </div>
+    </div>
   </main>
+
+  <footer>
+    <div>
+      <a href="contact.html">Contact Us</a>
+      <a href="guidelines.html">Guidelines</a>
+      <a href="privacy.html">Privacy Policy</a>
+      <a href="terms.html">Terms of Service</a>
+      <a href="https://unibrightonac.sharepoint.com/" target="_blank"
+        style="font-size: 0.75rem; opacity: 0.8; margin-top: 5px;">MyBrighton</a>
+    </div>
+
+    <div style="margin-top: 20px; font-size: 0.8rem; color: #01725a; width: 100%; padding-top: 2px;">
+      © 2026, STEP — University of Brighton.
+    </div>
+  </footer>
 </body>
+
 </html>
