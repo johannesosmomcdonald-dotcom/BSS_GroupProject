@@ -151,11 +151,7 @@ app.get("/api/users/search", requireLogin, async (req, res) => { //Sets up GET
 
 
     if (!degree) { // checks for search term 
-<<<<<<< HEAD
       return res.status(400).json({ error: "Please enter a search term" });
-=======
-      return res.status(400).json({ error: "Please enter a search term" }); 
->>>>>>> 332cbc3bcb5ae607c27fd29fcc1a180c3186e07a
     }
 
     const result = await pool.query( // POSTGRES query
@@ -267,15 +263,9 @@ app.get("/verify_email", async (req, res) => {
     const token = String(req.query.token).trim();
 
     if (!token) {
-<<<<<<< HEAD
       return res.status(400).json({ error: "no token " });
     }
 
-=======
-        return res.status(400).json({ error: "no token " });
-    }
-    
->>>>>>> 332cbc3bcb5ae607c27fd29fcc1a180c3186e07a
     const result = await pool.query(
       `SELECT id, verif_token_expires FROM users
        WHERE verif_token = $1`, [token]
@@ -452,11 +442,7 @@ app.post("/users", async (req, res) => { //sets up POST request, asyncronous as 
       from: `"STEP" <${process.env.EMAIL_USER}>`,
       to: email,
       subject: "Verfication to Sign In:",
-<<<<<<< HEAD
       html: `
-=======
-      html:`
->>>>>>> 332cbc3bcb5ae607c27fd29fcc1a180c3186e07a
         <h2>Welcome to BSS, ${first_name}!</h2>
         <p>Please verify your email address by clicking the link below:</p>
         <p><a href="${verf_link}">Verify my email</a></p>
@@ -480,7 +466,6 @@ app.post("/users", async (req, res) => { //sets up POST request, asyncronous as 
   }
 });
 
-<<<<<<< HEAD
 app.post("/api/messages", requireLogin, async (req, res) => { // api for messages
   try {
     const recipientId = Number(req.body.recipientId);
@@ -548,21 +533,11 @@ ${message}
       `,
     });
 
-=======
-app.post("/api/messages", requireLogin, async (req, res) => {
-  try {
-    const { recipientId, message } = req.body;
-    await pool.query(
-      'INSERT INTO messages (sender_id, recipient_id, message_text) VALUES ($1, $2, $3)',
-      [req.session.userId, recipientId, message]
-    );
->>>>>>> 332cbc3bcb5ae607c27fd29fcc1a180c3186e07a
     res.json({ message: "Message sent!" });
   } catch (error) {
     res.status(500).json({ error: "Server error" });
   }
 });
-<<<<<<< HEAD
 
 app.post("/api/contact-support", async (req, res) => { // post for contacting support/reporting people
   try {
@@ -608,8 +583,6 @@ ${description}
     res.status(500).json({ error: "Server error" });
   }
 });
-=======
->>>>>>> 332cbc3bcb5ae607c27fd29fcc1a180c3186e07a
 // this POST request sets up the verification for resetting the password
 app.post("/request-reset", async (req, res) => {
   try {
@@ -644,11 +617,7 @@ app.post("/request-reset", async (req, res) => {
       [resetCodeHash, resetCodeExpires, user.id]
     );
 
-<<<<<<< HEAD
     await transporter.sendMail({
-=======
-    await transporter.sendMail({ 
->>>>>>> 332cbc3bcb5ae607c27fd29fcc1a180c3186e07a
       from: `"STEP" <${process.env.EMAIL_USER}>`,
       to: user.email,
       subject: "Password reset code",
@@ -759,11 +728,7 @@ app.post("/login", async (req, res) => {
     }
 
     if (!user.email_verif) {
-<<<<<<< HEAD
       return res.status(403).json({ error: "Please verify your email first" });
-=======
-      return res.status(403).json({error: "Please verify your email first"});
->>>>>>> 332cbc3bcb5ae607c27fd29fcc1a180c3186e07a
     }
 
     req.session.userId = user.id; // stores id in session 
@@ -801,11 +766,8 @@ app.post("/logout", (req, res) => { // path POST for logout
 
 
 
-<<<<<<< HEAD
 
 
-=======
->>>>>>> 332cbc3bcb5ae607c27fd29fcc1a180c3186e07a
 ///////////////////////////////// ALL Listens are below this comment
 //loads local server 
 app.listen(port, () => {
